@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English 5A — منصة الإنجليزي للصف الخامس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF6F1; --paper:#FFFFFF; --paper2:#F4FAF6; --ink:#24444C; --muted:#5E7A80; --line:rgba(36,68,76,.12);
+  --sun:#FFDA7A; --coral:#F7BCAD; --sky:#BFE2F1; --leaf:#B3E2C6; --lav:#D8D2F3; --peach:#FFD6B5;
+  --tile-ink:#24444C; --good:#2B8F58; --good-bg:#DCF2E5; --bad:#C9604C; --bad-bg:#FBE3DD;
+  --shadow:0 18px 40px -24px rgba(36,68,76,.45); --r:22px;
+  --spring:cubic-bezier(.34,1.45,.64,1); --ease:cubic-bezier(.22,.8,.26,1);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#15282C; --paper:#1E363B; --paper2:#1A3035; --ink:#E7F2EE; --muted:#A3BDB9; --line:rgba(231,242,238,.13);
+    --good:#86D9A8; --good-bg:#1F4232; --bad:#F29B88; --bad-bg:#4A2A25; --shadow:0 18px 40px -24px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15282C; --paper:#1E363B; --paper2:#1A3035; --ink:#E7F2EE; --muted:#A3BDB9; --line:rgba(231,242,238,.13);
+  --good:#86D9A8; --good-bg:#1F4232; --bad:#F29B88; --bad-bg:#4A2A25; --shadow:0 18px 40px -24px rgba(0,0,0,.7);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Baloo Bhaijaan 2","Tajawal","Segoe UI",Tahoma,sans-serif;font-size:18px;line-height:1.65;
+  background-image:radial-gradient(circle at 8% 0%,rgba(255,218,122,.22),transparent 38%),radial-gradient(circle at 100% 35%,rgba(191,226,241,.28),transparent 42%);
+  min-height:100%;
+}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible{outline:3px solid #5AA9C9;outline-offset:2px}
+.en{direction:ltr;unicode-bidi:isolate}
+p.en,div.en{text-align:left}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px 48px}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:flex;align-items:center;gap:10px;
+  max-width:920px;margin:10px auto 18px;padding:8px 10px;background:var(--paper);border-radius:999px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.top .home{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-weight:700}
+.top .home:hover{background:var(--paper2)}
+.top .logo{font-size:26px}
+.top .grow{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sun);color:var(--tile-ink);font-weight:800}
+.iconbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:var(--paper2)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:var(--paper);border-radius:32px;padding:24px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.owl{font-size:78px;line-height:1;width:112px;height:112px;display:grid;place-items:center;border-radius:40% 60% 55% 45%;background:var(--sky);animation:bob 4s var(--ease) infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-3deg)}}
+.hello{text-align:inherit!important;margin:0;font-size:20px;font-weight:700;color:var(--muted)}
+.hero h1{margin:0;font-size:clamp(26px,5vw,38px);line-height:1.2}
+.sub{margin:6px 0 12px;color:var(--muted)}
+.bar{height:14px;border-radius:999px;background:var(--paper2);overflow:hidden;border:1px solid var(--line)}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--leaf),var(--sun));border-radius:999px;transition:width .8s var(--ease)}
+.barlbl{margin:6px 0 0;font-size:15px;color:var(--muted)}
+
+.how{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.how div{flex:1 1 160px;background:var(--paper);border:1px dashed var(--line);border-radius:18px;padding:10px 14px;font-size:15px}
+.how b{display:block;font-size:22px}
+
+/* path */
+.pathtitle{margin:26px 0 12px;font-size:24px}
+.pathtitle .en{font-size:16px;color:var(--muted);font-weight:500;margin-inline-start:8px}
+.path{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.stone{width:min(340px,82%)}
+.s1{margin-inline-start:9%}.s2{margin-inline-start:18%}.s3{margin-inline-start:9%}
+.stone:not(:last-child)::after{content:"• • •";display:block;padding-inline-start:60px;color:var(--muted);opacity:.55;letter-spacing:5px;font-size:18px;line-height:1.4}
+.stone button{width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;text-align:start;
+  background:var(--c);color:var(--tile-ink);padding:14px 16px;border-radius:40px 30px 44px 28px;box-shadow:var(--shadow);
+  transition:transform .45s var(--spring)}
+.stone:nth-child(even) button{border-radius:30px 44px 28px 40px}
+.stone button:hover{transform:translateY(-3px) rotate(-1deg)}
+.stone button:active{transform:scale(.97)}
+.num{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.75);display:grid;place-items:center;font-weight:800;font-size:24px}
+.stone .t{display:block;font-weight:800;font-size:19px;line-height:1.2}
+.stone .ar{display:block;font-size:15px;opacity:.85}
+.stars{font-size:18px;letter-spacing:1px;white-space:nowrap}
+.stars .off{opacity:.28}
+
+/* unit */
+.back{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;background:var(--paper);border:1px solid var(--line);font-weight:700;margin-bottom:12px}
+.uhero{background:var(--c);color:var(--tile-ink);border-radius:32px;padding:22px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;box-shadow:var(--shadow)}
+.uhero .big{font-size:64px;line-height:1;width:96px;height:96px;display:grid;place-items:center;background:rgba(255,255,255,.6);border-radius:44% 56% 50% 50%}
+.uhero h1{margin:0;font-size:clamp(26px,5vw,36px);line-height:1.15}
+.uhero .ar{margin:0;font-weight:700;font-size:20px}
+.uhero .d{margin:6px 0 0;font-size:15px;opacity:.9}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--paper);padding:6px;border-radius:999px;margin:18px 0;border:1px solid var(--line);box-shadow:var(--shadow)}
+.tabs button{padding:10px 6px;border-radius:999px;font-weight:700;font-size:17px;transition:background .3s var(--ease)}
+.tabs button[aria-selected="true"]{background:var(--c);color:var(--tile-ink)}
+.pane>*{animation:rise .5s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+
+h2.sec{font-size:22px;margin:8px 0 10px}
+.vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-bottom:22px}
+.chip{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:10px;text-align:center;transition:transform .35s var(--spring)}
+.chip:hover{transform:translateY(-2px)}
+.chip .e{font-size:30px;display:block;line-height:1.2}
+.chip b{display:block;font-size:17px}
+.chip small{display:block;color:var(--muted);font-size:14px}
+
+.lesson{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.lhead{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+.lnum{width:40px;height:40px;border-radius:50%;background:var(--c);color:var(--tile-ink);display:grid;place-items:center;font-weight:800;flex:none}
+.lhead h3{margin:0;font-size:21px;line-height:1.2}
+.lhead p{margin:0;color:var(--muted);font-size:15px}
+.exp{margin:6px 0 12px}
+.rule{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--paper2);border-left:6px solid var(--c);border-radius:14px;padding:10px 14px;font-weight:700;font-size:19px;margin-bottom:12px}
+.ex{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:8px}
+.ex li{display:flex;gap:10px;align-items:flex-start}
+.ex .en{display:block;font-weight:600}
+.ex .ar{display:block;color:var(--muted);font-size:15px}
+.say{flex:none;width:40px;height:40px;border-radius:50%;background:var(--paper2);border:1px solid var(--line);display:grid;place-items:center;font-size:17px;transition:transform .3s var(--spring)}
+.say:active{transform:scale(.9)}
+.say.sm{width:34px;height:34px;font-size:14px;display:inline-grid;vertical-align:middle}
+.check{background:var(--paper2);border-radius:18px;padding:12px 14px;border:1px dashed var(--line)}
+.check .ttl{margin:0 0 4px;font-weight:700;font-size:15px;color:var(--muted)}
+.check .q{margin:0 0 8px;font-weight:700}
+
+.opts{display:grid;gap:8px}
+.opt,.qopt{padding:12px 16px;border-radius:16px;background:var(--paper);border:2px solid var(--line);font-weight:600;text-align:left;transition:transform .3s var(--spring),background .3s}
+.opt:hover:not(:disabled){transform:translateY(-2px)}
+.ok{background:var(--good-bg)!important;border-color:var(--good)!important}
+.no{background:var(--bad-bg)!important;border-color:var(--bad)!important;animation:shake .45s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fb{min-height:1.6em;margin:8px 0 0;font-weight:600}
+.fb.g{color:var(--good)}.fb.b{color:var(--bad)}
+
+/* games */
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.gcard{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:18px;text-align:start;box-shadow:var(--shadow);transition:transform .4s var(--spring)}
+.gcard:hover{transform:translateY(-3px) rotate(-.6deg)}
+.gcard .e{font-size:40px;line-height:1.1;display:block}
+.gcard b{display:block;font-size:20px;margin-top:4px}
+.gcard .en{display:block;color:var(--muted);font-size:14px}
+.gcard p{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.gcard .done{position:absolute;top:12px;left:12px;background:var(--good-bg);color:var(--good);border-radius:999px;padding:0 10px;font-size:14px;font-weight:700}
+.ghead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.ghead .e{font-size:40px}
+.ghead h2{margin:0;font-size:22px;line-height:1.2}
+.ghead p{margin:0;color:var(--muted);font-size:15px}
+.prog{height:10px;background:var(--paper);border-radius:999px;overflow:hidden;border:1px solid var(--line);margin-bottom:14px}
+.prog span{display:block;height:100%;background:var(--c,var(--leaf));transition:width .5s var(--ease)}
+.stage{background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:20px;box-shadow:var(--shadow)}
+.prompt{text-align:center;margin-bottom:14px}
+.bigemo{font-size:72px;line-height:1.1}
+.ar.big{font-size:24px;font-weight:700;margin:4px 0}
+.bubbles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bub{padding:16px 10px;border-radius:999px;background:var(--c);color:var(--tile-ink);font-weight:800;font-size:19px;border:2px solid transparent;transition:transform .35s var(--spring)}
+.bub:hover:not(:disabled){transform:scale(1.04)}
+.bub:disabled{opacity:.5}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.card{position:relative;aspect-ratio:1/1.05;transform-style:preserve-3d;transition:transform .55s var(--ease)}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:6px;text-align:center}
+.front{background:var(--c);color:var(--tile-ink);font-size:32px;font-weight:800;box-shadow:inset 0 -5px 0 rgba(0,0,0,.08)}
+.cback{background:var(--paper2);border:2px solid var(--line);transform:rotateY(180deg)}
+.cback b{font-size:16px;line-height:1.2}
+.cback .emo{font-size:28px}
+.cback small{font-size:13px;line-height:1.2}
+.card.done .cback{background:var(--good-bg);border-color:var(--good)}
+.meta{color:var(--muted);text-align:center;margin:12px 0 0}
+.hint{text-align:center;font-weight:700;font-size:19px;margin:0 0 8px}
+.listen{display:block;margin:0 auto 12px;padding:6px 14px;border-radius:999px;background:var(--paper2);border:1px solid var(--line);font-size:15px}
+.line{min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px;border-radius:18px;background:var(--paper2);border:2px dashed var(--line);margin-bottom:12px}
+.line.okline{border-style:solid;border-color:var(--good);background:var(--good-bg)}
+.ph{color:var(--muted);font-size:15px;direction:rtl}
+.pool,.letters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tok,.let{padding:8px 14px;border-radius:14px;background:var(--c);color:var(--tile-ink);font-weight:700;font-size:18px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.08);transition:transform .3s var(--spring)}
+.tok.in{background:var(--paper);color:var(--ink);border:2px solid var(--line);box-shadow:none}
+.tok:hover,.let:hover:not(:disabled){transform:translateY(-2px)}
+.let{min-width:48px;font-size:22px}
+.let:disabled{opacity:.25}
+.slots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:0 0 14px}
+.slot{width:40px;height:48px;border-bottom:4px solid var(--line);display:grid;place-items:center;font-size:24px;font-weight:800}
+.slot.f{border-color:var(--c)}
+.slots.okline .slot{color:var(--good);border-color:var(--good)}
+.row{display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btn{padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--paper);font-weight:800;font-size:17px;transition:transform .35s var(--spring)}
+.btn:hover:not(:disabled){transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn.ghost{background:var(--paper2);color:var(--ink);border:1px solid var(--line)}
+.sortitem{display:flex;align-items:center;justify-content:center;gap:12px;font-size:30px;font-weight:800;padding:18px;border-radius:22px;background:var(--paper2);margin-bottom:14px}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.bucket{padding:14px 8px;border-radius:20px 20px 30px 30px;background:var(--c);color:var(--tile-ink);border:2px solid transparent;transition:transform .35s var(--spring)}
+.bucket:hover{transform:translateY(-3px)}
+.bucket b{display:block;font-size:20px}
+.bucket small{display:block;font-size:13px}
+.end{text-align:center}
+.end .bigemo{font-size:84px}
+.end h2{margin:4px 0}
+
+/* quiz */
+.qnum{margin:0;color:var(--muted);font-size:15px}
+.q{font-size:21px;font-weight:700;margin:6px 0 8px}
+.qa{margin:-4px 0 10px;color:var(--muted);font-size:15px}
+.blank{display:inline-block;min-width:56px;border-bottom:3px solid var(--c,var(--sun));color:transparent}
+.fbbox{margin-top:12px;border-radius:18px;padding:12px 16px}
+.fbbox.good{background:var(--good-bg)}
+.fbbox.bad{background:var(--bad-bg)}
+.fbbox p{margin:0 0 6px}
+.fbt{font-weight:800;font-size:18px}
+.review{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px;text-align:start}
+.review li{background:var(--paper2);border-radius:16px;padding:10px 14px;border:1px solid var(--line)}
+.review .en{display:block;font-weight:700}
+.review small{display:block;color:var(--muted)}
+.tips{padding-inline-start:20px;margin:8px 0 14px}
+.tips li{margin-bottom:4px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:20px;background:rgba(20,40,44,.45)}
+.modal .box{background:var(--paper);border-radius:30px;padding:26px;max-width:400px;width:100%;text-align:center;box-shadow:var(--shadow);animation:rise .5s var(--spring)}
+.modal input{width:100%;font:inherit;font-size:20px;padding:12px 16px;border-radius:16px;border:2px solid var(--line);background:var(--paper2);color:var(--ink);margin:10px 0 14px;text-align:center}
+
+footer{text-align:center;color:var(--muted);font-size:14px;margin-top:30px}
+footer button{text-decoration:underline;font-size:14px;color:var(--muted)}
+
+.spark{position:fixed;pointer-events:none;z-index:40;font-size:24px;animation:fly 1s var(--ease) forwards}
+@keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(.6);opacity:0}}
+
+@media (max-width:560px){
+  body{font-size:17px}
+  .hero{grid-template-columns:1fr;text-align:center}
+  .owl{margin:0 auto;width:92px;height:92px;font-size:60px}
+  .uhero{grid-template-columns:1fr;text-align:center}
+  .uhero .big{margin:0 auto}
+  .mem{grid-template-columns:repeat(3,1fr)}
+  .stone{width:92%}
+  .s1,.s2,.s3{margin-inline-start:4%}
+  .s2{margin-inline-start:8%}
+  .top .home span.t{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="شريط التنقل">
+  <button class="home" id="homeBtn"><span class="logo">🦉</span><span class="t">English 5A</span></button>
+  <span class="grow"></span>
+  <span class="pill" id="starCount">⭐ 0</span>
+  <button class="iconbtn" id="muteBtn" aria-label="تشغيل أو إيقاف الأصوات">🔔</button>
+</nav>
+<main class="wrap" id="app"></main>
+<div class="wrap"><footer>منصة تدريب لكتاب Team Together Oman 5A — الصف الخامس · <button id="resetBtn">مسح تقدّمي والبدء من جديد</button></footer></div>
+
+<script>
+/* ================= DATA ================= */
+const UNITS = [
+{
+ id:"w", num:"W", title:"Welcome back", ar:"أهلاً بالعودة", emoji:"👋", color:"sun",
+ desc:"الأنشطة الأسبوعية، المضارع المستمر، after / before / when، ووصف الشعر والوجه.",
+ vocab:[["library","مكتبة","📚"],["Chess Club","نادي الشطرنج","♟️"],["tennis lesson","درس تنس","🎾"],["computer games","ألعاب الكمبيوتر","🎮"],["music lesson","درس موسيقى","🎵"],["Sunday","الأحد","📅"],["Monday","الاثنين","🗓️"],["Thursday","الخميس","📆"],["curly","مجعّد","🌀"],["straight","ناعم / مستقيم","📏"],["fair","أشقر / فاتح","👱"],["dark","داكن / غامق","🖤"],["beard","لحية","🧔"],["moustache","شارب","👨"]],
+ lessons:[
+  {en:"My week",ar:"أسبوعي",exp:"عندما نتكلم عن شيء نفعله كل أسبوع في نفس اليوم نقول: On + اسم اليوم + s. مثلاً On Sundays تعني «في كل يوم أحد». وتذكّر: أيام الأسبوع تُكتب دائماً بحرف كبير.",rule:"On Sundays, I play basketball.",
+   ex:[["On Mondays, I go to the library.","في أيام الاثنين أذهب إلى المكتبة."],["On Tuesdays, I have a tennis lesson.","في أيام الثلاثاء عندي درس تنس."],["On Thursdays, I go to Chess Club.","في أيام الخميس أذهب إلى نادي الشطرنج."]],
+   check:{q:"___ Sundays, I play basketball.",o:["On","In","At"],why:"مع أيام الأسبوع نستخدم On."}},
+  {en:"What are they doing?",ar:"ماذا يفعلون الآن؟ (المضارع المستمر)",exp:"نستخدم المضارع المستمر لشيء يحدث الآن. نضع am أو is أو are ثم الفعل مع ing. مع I نستخدم am، ومع He / She / It نستخدم is، ومع We / You / They نستخدم are.",rule:"am / is / are + verb-ing",
+   ex:[["Khalid is building a robot.","خالد يبني روبوتاً (الآن)."],["Maryam and Bushra are playing basketball.","مريم وبشرى تلعبان كرة السلة."],["I am drinking a glass of water.","أنا أشرب كوباً من الماء."]],
+   check:{q:"Nabhan and Hilal ___ fishing.",o:["are","is","am"],why:"نبهان وهلال شخصان (جمع)، لذلك نستخدم are."}},
+  {en:"after, before, when",ar:"بعد، قبل، عندما",exp:"نربط بين نشاطين بهذه الكلمات: after تعني «بعد»، before تعني «قبل»، when تعني «عندما». إذا بدأنا الجملة بها نضع فاصلة (,) بين الجزأين.",rule:"After I play tennis, I go home.",
+   ex:[["After we have lunch, we go to the park.","بعد أن نتناول الغداء نذهب إلى الحديقة."],["Before my sister watches TV, she does her homework.","قبل أن تشاهد أختي التلفاز تحلّ واجبها."],["When he goes to the library, he reads a book.","عندما يذهب إلى المكتبة يقرأ كتاباً."]],
+   check:{q:"I have Maths first and then Art. → ___ I have Art, I have Maths.",o:["Before","After","When"],why:"الرياضيات تأتي قبل الفن، لذلك نقول Before I have Art."}},
+  {en:"Hair and faces",ar:"وصف الشعر والوجه",exp:"لوصف الشكل نقول He's got أو She's got ثم الصفات بهذا الترتيب: الطول ← اللون ← النوع، ثم كلمة hair. ونقول He's got a beard (لحية) أو a moustache (شارب).",rule:"She's got long, dark, curly hair.",
+   ex:[["He's got short, straight hair.","شعره قصير وناعم."],["She's got long, fair, curly hair.","شعرها طويل وأشقر ومجعّد."],["He's got a beard and a moustache.","لديه لحية وشارب."]],
+   check:{q:"He's got ___ hair.",o:["short, dark, straight","straight, short, dark","dark, straight, short"],why:"الترتيب الصحيح: الطول ثم اللون ثم النوع."}}
+ ],
+ sentences:[["Khalid is building a robot.","خالد يبني روبوتاً."],["On Sundays, I have a music lesson.","في أيام الأحد عندي درس موسيقى."],["After I have lunch, I go to the park.","بعد الغداء أذهب إلى الحديقة."],["She's got long, curly hair.","شعرها طويل ومجعّد."],["They are playing computer games.","هم يلعبون ألعاب الكمبيوتر."]],
+ sort:{en:"Hair words",ar:"صنّف كلمات الشعر",buckets:[["Length","الطول"],["Colour","اللون"],["Type","النوع"]],items:[["long",0],["short",0],["fair",1],["dark",1],["black",1],["curly",2],["straight",2]]},
+ quiz:[
+  {q:"Maryam and Bushra ___ basketball.",o:["are playing","is playing","am playing"],why:"مريم وبشرى اثنتان (جمع)، فنستخدم are + playing."},
+  {q:"I ___ a glass of water.",o:["am drinking","is drinking","are drinking"],why:"مع I نستخدم دائماً am."},
+  {q:"Khalid ___ a robot.",o:["is building","are building","building"],why:"خالد شخص واحد، فنستخدم is + building، ولا يصح حذف is."},
+  {q:"___ I get home, I always do my homework.",o:["When","Who","Than"],why:"When تعني «عندما» وتربط بين وقتين."},
+  {q:"I play tennis and then I go home. → ___ I play tennis, I go home.",o:["After","Before","Because"],why:"التنس أولاً ثم البيت، إذن «بعد أن ألعب التنس» = After."},
+  {q:"She does her homework and then watches TV. → ___ she watches TV, she does her homework.",o:["Before","After","Where"],why:"الواجب يأتي قبل التلفاز، إذن Before."},
+  {q:"He's got hair above his mouth. It's a ___.",o:["moustache","beard","hat"],why:"moustache هو الشارب فوق الفم، و beard هي اللحية على الذقن."},
+  {q:"Which is the opposite of curly hair?",o:["straight hair","long hair","fair hair"],why:"curly تعني مجعّد، وعكسها straight أي ناعم مستقيم."},
+  {q:"She's got ___ hair.",o:["long, dark, curly","curly, dark, long","dark, long, curly"],why:"الترتيب الصحيح: الطول ثم اللون ثم النوع."},
+  {q:"On ___, I have a music lesson.",o:["Sundays","sundays","Sunday's"],why:"اسم اليوم بحرف كبير ونضيف s للعادة الأسبوعية: On Sundays."}
+ ]
+},
+{
+ id:"u1", num:"1", title:"Talent show", ar:"عرض المواهب", emoji:"🎭", color:"coral",
+ desc:"صفات الشخصية وأضدادها، المقارنة والتفضيل، good at + ing، وأدوات الربط.",
+ vocab:[["confident","واثق من نفسه","😎"],["shy","خجول","🙈"],["friendly","ودود","🤗"],["unfriendly","غير ودود","😒"],["hard-working","مجتهد","💪"],["lazy","كسول","😴"],["kind","طيّب","💝"],["mean","لئيم","😈"],["polite","مؤدّب","🙏"],["rude","قليل الأدب","😤"],["tidy","مرتّب","🧹"],["untidy","فوضوي","🌪️"],["juggle","يلعب الخفّة بالكرات","🤹"],["count","يعدّ","🔢"],["spell","يتهجّى","🔤"],["bake a cake","يخبز كعكة","🎂"],["fix toys","يصلح الألعاب","🔧"],["do experiments","يجري تجارب","🧪"],["make a pizza","يصنع بيتزا","🍕"],["throw a ball","يرمي كرة","⚾"]],
+ lessons:[
+  {en:"Personality & opposites",ar:"صفات الشخصية وأضدادها",exp:"بعض الصفات تأتي في أزواج متضادة. أحياناً نصنع العكس بإضافة un في أول الكلمة: friendly ← unfriendly و tidy ← untidy. نصيحة: كلما تعلمت كلمة جديدة احفظ عكسها معها!",rule:"shy ↔ confident · polite ↔ rude",
+   ex:[["hard-working ↔ lazy","مجتهد ↔ كسول"],["kind ↔ mean","طيّب ↔ لئيم"],["tidy ↔ untidy","مرتّب ↔ فوضوي"]],
+   check:{q:"She's afraid to talk to new people. She's ___.",o:["shy","confident","rude"],why:"تخاف من الكلام مع الناس الجدد = shy (خجولة)."}},
+  {en:"Comparatives",ar:"المقارنة بين شيئين (than)",exp:"للمقارنة بين اثنين: الصفة القصيرة نضيف لها er ثم than (kind ← kinder than). إذا انتهت بـ y نحولها إلى ier (shy ← shier، friendly ← friendlier). وإذا انتهت بحرف ساكن بعد حرف متحرك نكرر الحرف (big ← bigger). الصفة الطويلة نضع قبلها more.",rule:"kinder than · more hard-working than",
+   ex:[["Zaid is kinder than Qais.","زيد أطيب من قيس."],["My brother is more hard-working than my sister.","أخي أكثر اجتهاداً من أختي."],["The red house is bigger than the green house.","البيت الأحمر أكبر من البيت الأخضر."]],
+   check:{q:"Basim is ___ than Abdulaziz.",o:["friendlier","friendlyer","more friendlier"],why:"friendly تنتهي بـ y فتصبح friendlier."}},
+  {en:"Superlatives",ar:"التفضيل: الأكثر (the ... est)",exp:"عندما نقارن شيئاً بالجميع نستخدم the + الصفة + est (the quietest، the shiest، the biggest). والصفة الطويلة: the most confident. وهناك صفات شاذة يجب حفظها: good ← better ← the best و bad ← worse ← the worst.",rule:"the quietest · the most confident · the best",
+   ex:[["My friends are the quietest in the library.","أصدقائي هم الأهدأ في المكتبة."],["Jasim and Younis are the most confident students in class.","جاسم ويونس أكثر الطلاب ثقة في الصف."],["Noora is the best at juggling.","نورة هي الأفضل في لعب الخفّة."]],
+   check:{q:"This is the ___ chocolate! (bad)",o:["worst","baddest","worse"],why:"bad صفة شاذة: bad ← worse ← the worst."}},
+  {en:"good at + ing",ar:"ماهر في… (good at + ing)",exp:"لنقول ما مستوانا في مهارة: great at (ممتاز) ، good at (جيد) ، not very good at (لست جيداً جداً) ، terrible at (سيئ جداً). وبعد at يأتي الفعل مع ing دائماً.",rule:"I'm great at making pizza.",
+   ex:[["Halima is great at making pizza.","حليمة ممتازة في صنع البيتزا."],["She isn't very good at throwing a ball.","هي ليست جيدة جداً في رمي الكرة."],["I'm terrible at fixing toys.","أنا سيئ جداً في إصلاح الألعاب."]],
+   check:{q:"He's good at ___ new words.",o:["spelling","spell","spells"],why:"بعد at يأتي الفعل مع ing: spelling."}},
+  {en:"Describing people",ar:"ثلاثة أسئلة مهمة عن الأشخاص",exp:"انتبه! هذه الأسئلة الثلاثة تتشابه لكن معانيها مختلفة: What does he look like? عن الشكل. What's he like? عن الشخصية والطباع. What's he good at? عن المهارات والمواهب.",rule:"look like = شكل · like = شخصية · good at = موهبة",
+   ex:[["What does he look like? — He's got short, fair hair.","كيف شكله؟ — شعره قصير وأشقر."],["What's he like? — He's really kind.","كيف شخصيته؟ — هو طيب جداً."],["What's he good at? — He's good at juggling.","ما الذي يجيده؟ — يجيد لعب الخفّة."]],
+   check:{q:"What does she look like?",o:["She's got long, dark hair.","She's very polite.","She's good at baking."],why:"look like تسأل عن الشكل، فالإجابة عن الشعر والمظهر."}},
+  {en:"Linking words",ar:"أدوات الربط",exp:"نربط الأفكار بهذه الكلمات: and (و) ، or (أو) ، but (لكن) ، so (لذلك) ، because (لأن). تجعل كتابتك أجمل وأطول!",rule:"and · or · but · so · because",
+   ex:[["Amira is kind and friendly.","أميرة طيبة وودودة."],["I don't have much money, but this sandwich is cheap, so I can buy it.","ليس معي مال كثير، لكن هذا الساندويتش رخيص، لذلك أستطيع شراءه."],["She is very important in my life because she is very kind.","هي مهمة جداً في حياتي لأنها طيبة جداً."]],
+   check:{q:"What's more delicious: chocolate ___ a cupcake?",o:["or","but","so"],why:"عند الاختيار بين شيئين نستخدم or."}}
+ ],
+ sentences:[["Holly is more hard-working than Bill.","هولي أكثر اجتهاداً من بيل."],["Sabah is the most confident student in class.","صباح هي أكثر طالبة واثقة في الصف."],["My sister isn't very good at throwing a ball.","أختي ليست جيدة جداً في رمي الكرة."],["Amira is kind and friendly.","أميرة طيبة وودودة."],["Basim is friendlier than Abdulaziz.","باسم أكثر وداً من عبدالعزيز."]],
+ sort:{en:"Make it bigger!",ar:"كيف نصنع المقارنة؟",buckets:[["+ er","نضيف er"],["y → ier","y تصبح ier"],["more …","نضع more"],["Irregular","شاذة"]],items:[["kind",0],["tall",0],["quiet",0],["young",0],["shy",1],["friendly",1],["tidy",1],["lazy",1],["confident",2],["hard-working",2],["dangerous",2],["good",3],["bad",3]]},
+ quiz:[
+  {q:"The opposite of shy is ___.",o:["confident","lazy","rude"],why:"shy تعني خجول، وعكسها confident أي واثق من نفسه."},
+  {q:"He always says ‘please’ and ‘thank you’. He's very ___.",o:["polite","rude","mean"],why:"من يقول «من فضلك» و«شكراً» هو polite (مؤدّب)."},
+  {q:"She's got all her things in order. She's ___.",o:["tidy","untidy","lazy"],why:"أشياؤها مرتبة = tidy."},
+  {q:"He doesn't want to work very hard. He's ___.",o:["lazy","hard-working","kind"],why:"لا يحب العمل = lazy (كسول)، وعكسها hard-working."},
+  {q:"My friend Basim is ___ than my friend Abdulaziz.",o:["friendlier","friendliest","more friendlier"],why:"مقارنة بين اثنين مع than: friendly ← friendlier."},
+  {q:"Hanan's bedroom is the ___ room in the house.",o:["untidiest","untidier","untidy"],why:"مع the نستخدم التفضيل: untidy ← the untidiest."},
+  {q:"This is the ___ film I know!",o:["best","better","goodest"],why:"good صفة شاذة: good ← better ← the best."},
+  {q:"The red house is ___ than the green house.",o:["bigger","biger","biggest"],why:"big نكرر فيها الحرف الأخير: bigger، ومع than نستخدم المقارنة."},
+  {q:"Sabah is the ___ student in class.",o:["most confident","more confident","confidentest"],why:"confident كلمة طويلة، فنقول the most confident."},
+  {q:"Halima is great at ___ pizza.",o:["making","make","makes"],why:"بعد at يأتي الفعل مع ing: great at making."},
+  {q:"What's he like?",o:["He's kind and friendly.","He's got short, dark hair.","He's great at juggling."],why:"What's he like? تسأل عن الشخصية والطباع، وليس الشكل."},
+  {q:"This room is very untidy ___ the children are playing.",o:["because","or","so"],why:"because تعني «لأن» وتشرح السبب."}
+ ]
+},
+{
+ id:"u2", num:"2", title:"Then and now", ar:"الماضي والحاضر", emoji:"📼", color:"sky",
+ desc:"التكنولوجيا، الماضي البسيط، could / couldn't، نطق ed، وطلب المعلومات.",
+ vocab:[["CD player","مشغّل أقراص","💿"],["computer","حاسوب","🖥️"],["email","بريد إلكتروني","📧"],["keyboard","لوحة المفاتيح","⌨️"],["letter","رسالة ورقية","✉️"],["mobile phone","هاتف جوّال","📱"],["mouse","فأرة الحاسوب","🖱️"],["tablet","جهاز لوحي","📲"],["telephone","هاتف أرضي","☎️"],["call","يتصل","📞"],["carry","يحمل","🎒"],["study","يدرس","📖"],["hold a pen","يمسك قلماً","🖊️"],["make a face","يصنع وجهاً مضحكاً","😜"],["make a sandwich","يصنع ساندويتش","🥪"],["post a letter","يرسل رسالة بالبريد","📮"],["send an email","يرسل بريداً إلكترونياً","📤"],["tell a story","يحكي قصة","📚"],["tie a shoelace","يربط رباط الحذاء","👟"],["win a race","يفوز بسباق","🏆"]],
+ lessons:[
+  {en:"Technology then and now",ar:"التكنولوجيا قديماً وحديثاً",exp:"في الماضي كان الناس يكتبون letter (رسالة ورقية) ويستخدمون telephone (هاتف أرضي) و CD player لسماع الموسيقى. اليوم نستخدم email و mobile phone و tablet.",rule:"letter → email · telephone → mobile phone",
+   ex:[["You can use a CD player to listen to music.","تستطيع استخدام مشغل الأقراص لسماع الموسيقى."],["A mobile phone is a small telephone you carry with you.","الجوّال هاتف صغير تحمله معك."],["You touch the letters on a keyboard to write.","تلمس الحروف على لوحة المفاتيح لتكتب."]],
+   check:{q:"You write this with a pen and some paper: a ___.",o:["letter","tablet","mouse"],why:"الرسالة الورقية letter تُكتب بالقلم على الورق."}},
+  {en:"Past simple: regular verbs",ar:"الماضي البسيط: الأفعال المنتظمة",exp:"للكلام عن شيء انتهى في الماضي نضيف ed للفعل: play ← played. إذا انتهى الفعل بحرف ساكن + y نحولها إلى ied: try ← tried، carry ← carried. وبعض الأفعال نكرر حرفها الأخير: stop ← stopped.",rule:"play → played · try → tried",
+   ex:[["My mum carried my bag to school.","حملت أمي حقيبتي إلى المدرسة."],["I used a mobile phone.","استخدمتُ هاتفاً جوالاً."],["We visited a museum last year.","زرنا متحفاً في السنة الماضية."]],
+   check:{q:"Yesterday I ___ football with my friends.",o:["played","plaied","play"],why:"play تنتهي بحرف متحرك + y، فنضيف ed فقط: played."}},
+  {en:"Past simple: irregular verbs",ar:"الماضي البسيط: الأفعال الشاذة",exp:"بعض الأفعال لا تأخذ ed ولها ماضٍ خاص يجب حفظه. هذه أهمها في الوحدة:",rule:"go → went · have → had · eat → ate",
+   ex:[["give → gave · lose → lost · win → won","يعطي ← أعطى · يخسر ← خسر · يفوز ← فاز"],["drink → drank · wear → wore · see → saw","يشرب ← شرب · يلبس ← لبس · يرى ← رأى"],["write → wrote · send → sent · tell → told","يكتب ← كتب · يرسل ← أرسل · يحكي ← حكى"]],
+   check:{q:"Manar ___ a scarf because it was cold.",o:["wore","weared","wear"],why:"wear فعل شاذ، ماضيه wore."}},
+  {en:"didn't and Did …?",ar:"النفي والسؤال في الماضي",exp:"للنفي نقول didn't + الفعل في أصله (بدون ed). وللسؤال نبدأ بـ Did والفعل أيضاً في أصله. الإجابة: Yes, I did. / No, I didn't. كلمات الزمن: yesterday (أمس)، last week / month / year (الماضي)، two days ago (قبل يومين).",rule:"I didn't use a tablet. · Did you call me?",
+   ex:[["I didn't play football yesterday.","لم ألعب كرة القدم أمس."],["Did you use a computer at school today? — No, I didn't.","هل استخدمت الحاسوب في المدرسة اليوم؟ — لا."],["He lost the race two days ago.","خسر السباق قبل يومين."]],
+   check:{q:"Did the doctor ___ you yesterday?",o:["see","saw","seen"],why:"بعد Did يرجع الفعل لأصله: see."}},
+  {en:"could / couldn't",ar:"كان يستطيع / لم يكن يستطيع",exp:"could تعني «كان يستطيع» في الماضي، و couldn't تعني «لم يكن يستطيع». الفعل بعدها يبقى في أصله. السؤال: Could you …? والإجابة: Yes, I could. / No, I couldn't.",rule:"I couldn't knit last year, but I can knit now.",
+   ex:[["Rawan couldn't post a letter, but she could make a face.","روان لم تكن تستطيع إرسال رسالة، لكنها كانت تستطيع صنع وجه مضحك."],["When he was six, he could tie a shoelace.","عندما كان في السادسة كان يستطيع ربط الحذاء."],["Could you use a tablet when you were four?","هل كنت تستطيع استخدام الجهاز اللوحي وعمرك أربع سنوات؟"]],
+   check:{q:"When I was one, I ___ spell words.",o:["couldn't","can't","didn't could"],why:"الماضي ← couldn't، والفعل بعدها في أصله."}},
+  {en:"Saying -ed",ar:"نطق ed في آخر الفعل",exp:"تُنطق ed بثلاث طرق: /ɪd/ إذا انتهى الفعل بصوت t أو d (started, needed). و /t/ بعد أصوات مثل p, k, s, sh, ch (stopped, worked, watched). و /d/ بعد باقي الأصوات (moved, lived, played). اضغط 🔊 واسمع الفرق!",rule:"/t/ worked · /d/ lived · /ɪd/ started",
+   ex:[["worked · stopped · watched","صوت /t/"],["moved · lived · played","صوت /d/"],["started · needed · wanted","صوت /ɪd/"]],
+   check:{q:"Which word ends with the /ɪd/ sound?",o:["needed","played","stopped"],why:"need تنتهي بصوت d، فتُنطق ed مثل /ɪd/."}},
+  {en:"Asking for information",ar:"طلب معلومات (حوار)",exp:"هذه جمل مفيدة عندما تسأل عن مكان مثل المتحف. احفظها واستمع لنطقها:",rule:"I'd like some information about …, please.",
+   ex:[["What can you see and do there? — You can learn about boats, farms and coins.","ماذا يمكن أن ترى وتفعل هناك؟ — تتعلم عن القوارب والمزارع والعملات."],["What time does it open and close?","متى يفتح ومتى يغلق؟"],["It's open on Saturday to Thursday from 10 am to 5 pm.","مفتوح من السبت إلى الخميس من 10 صباحاً إلى 5 مساءً."]],
+   check:{q:"What time does it open and close?",o:["From 10 am to 5 pm.","You can learn about coins.","Thank you very much."],why:"السؤال عن الوقت، فالإجابة فيها ساعات العمل."}}
+ ],
+ sentences:[["I didn't use a tablet.","لم أستخدم جهازاً لوحياً."],["Did you call me yesterday?","هل اتصلت بي أمس؟"],["Rawan couldn't post a letter.","روان لم تكن تستطيع إرسال رسالة."],["We ate cereal for breakfast this morning.","أكلنا حبوب الإفطار هذا الصباح."],["What time does it open and close?","متى يفتح ومتى يغلق؟"]],
+ sort:{en:"How do we say -ed?",ar:"صنّف حسب نطق ed",buckets:[["/t/","صوت ت"],["/d/","صوت د"],["/ɪd/","صوت إد"]],items:[["worked",0],["stopped",0],["watched",0],["moved",1],["lived",1],["played",1],["started",2],["needed",2],["wanted",2],["visited",2]]},
+ quiz:[
+  {q:"My mum ___ my bag to school yesterday.",o:["carried","carryed","carries"],why:"carry تنتهي بحرف ساكن + y فتصبح carried."},
+  {q:"___ you call me yesterday?",o:["Did","Do","Were"],why:"سؤال الماضي يبدأ بـ Did والفعل في أصله."},
+  {q:"My brother ___ Science last year. (not study)",o:["didn't study","didn't studied","not studied"],why:"النفي في الماضي: didn't + الفعل في أصله."},
+  {q:"We ___ cereal for breakfast this morning.",o:["ate","eated","eat"],why:"eat فعل شاذ، ماضيه ate."},
+  {q:"When she was two, she ___ tie a shoelace.",o:["couldn't","can't","didn't could"],why:"couldn't تعني «لم تكن تستطيع» في الماضي."},
+  {q:"Could you use a tablet when you were four?",o:["Yes, I could.","Yes, I can.","Yes, I did could."],why:"نجيب بنفس الفعل: Could …? ← Yes, I could."},
+  {q:"You can use it to listen to music: a ___.",o:["CD player","keyboard","mouse"],why:"CD player هو مشغّل الأقراص للموسيقى."},
+  {q:"A small telephone you carry with you: a ___.",o:["mobile phone","letter","computer"],why:"mobile phone هو الهاتف الجوال الذي نحمله."},
+  {q:"The past of ‘win’ is ___.",o:["won","winned","wan"],why:"win فعل شاذ: win ← won."},
+  {q:"What time does the museum open?",o:["It's open from 10 am to 5 pm.","You can learn about boats.","Yes, of course."],why:"السؤال بـ What time، فالإجابة وقت."},
+  {q:"Which word ends with the /ɪd/ sound?",o:["needed","played","stopped"],why:"الأفعال التي تنتهي بـ t أو d تُنطق ed فيها /ɪd/."},
+  {q:"I lost the race two days ___.",o:["ago","last","next"],why:"ago تعني «قبل» وتأتي بعد المدة: two days ago."}
+ ]
+},
+{
+ id:"u3", num:"3", title:"Let's explore!", ar:"هيا نستكشف!", emoji:"🚀", color:"lav",
+ desc:"الفضاء، المستقبل will / won't، الأعداد الكبيرة، How far / high / deep، والمعلومات الشخصية.",
+ vocab:[["comet","مذنّب","☄️"],["Earth","الأرض","🌍"],["Moon","القمر","🌕"],["planet","كوكب","🪐"],["rocket","صاروخ","🚀"],["satellite","قمر صناعي","🛰️"],["solar system","المجموعة الشمسية","🌌"],["space station","محطة فضائية","🛸"],["spacesuit","بدلة الفضاء","👨‍🚀"],["star","نجمة","⭐"],["Sun","الشمس","☀️"],["telescope","تلسكوب","🔭"]],
+ lessons:[
+  {en:"Space words",ar:"كلمات الفضاء",exp:"اقرأ هذه الفقرة القصيرة واستمع لها. تذكّر أن Earth و Moon و Sun تبدأ بحرف كبير.",rule:"There are eight planets in our solar system.",
+   ex:[["They move around the Sun, which is a big star.","تدور حول الشمس، وهي نجمة كبيرة."],["We live on planet Earth. Our planet has got a satellite called the Moon.","نعيش على كوكب الأرض، ولكوكبنا قمر اسمه القمر."],["It's fun to watch the sky at night with a telescope!","من الممتع مشاهدة السماء ليلاً بالتلسكوب!"]],
+   check:{q:"Astronauts wear a ___ when they travel into space.",o:["spacesuit","comet","telescope"],why:"spacesuit هي بدلة الفضاء التي يلبسها رواد الفضاء."}},
+  {en:"will / won't",ar:"المستقبل: will و won't",exp:"نستخدم will + الفعل للكلام عن المستقبل، و won't (أي will not) للنفي. will لا تتغير مع أي ضمير. السؤال: Will you …? والإجابة: Yes, I will. / No, I won't. كلمات الزمن: tomorrow، next week، on Tuesday.",rule:"She will wear a spacesuit. She won't wear jeans.",
+   ex:[["I will travel to space next week.","سأسافر إلى الفضاء الأسبوع القادم."],["Hamed won't write a letter, but he will send an email.","حامد لن يكتب رسالة، لكنه سيرسل بريداً إلكترونياً."],["Will you wear trainers to school tomorrow? — No, I won't.","هل ستلبس حذاءً رياضياً غداً؟ — لا."]],
+   check:{q:"Will you study English tomorrow? — Yes, I ___.",o:["will","do","am"],why:"نجيب بنفس الفعل: Will …? ← Yes, I will."}},
+  {en:"Big numbers",ar:"الأعداد الكبيرة",exp:"a hundred = 100 ، a thousand = 1,000 ، a million = 1,000,000. في الإنجليزية نضع and بعد hundred: three hundred and sixty = 360. ونضع فاصلة كل ثلاثة أرقام: 50,000.",rule:"4,250 = four thousand, two hundred and fifty",
+   ex:[["500 = five hundred · 5,000 = five thousand","خمسمئة · خمسة آلاف"],["10,000 = ten thousand · 50,000 = fifty thousand","عشرة آلاف · خمسون ألفاً"],["100,000 = a hundred thousand · 1,000,000 = a million","مئة ألف · مليون"]],
+   check:{q:"50,000 = ?",o:["fifty thousand","five thousand","five hundred thousand"],why:"50 ألف = fifty thousand."}},
+  {en:"How far? How high?",ar:"أسئلة القياس",exp:"How far = كم تبعد (مسافة). How high = كم ارتفاع (جبل). How tall = كم طول (شخص أو مبنى). How wide = كم عرض. How deep = كم عمق (بحر أو بحيرة).",rule:"How far is it from Muscat to Salalah?",
+   ex:[["It's about 1,000 kilometres.","حوالي 1000 كيلومتر."],["How high is Jabal Shams? — It's about 3,000 metres high.","كم ارتفاع جبل شمس؟ — حوالي 3000 متر."],["How deep is the lake? — It's 5 metres deep.","كم عمق البحيرة؟ — عمقها 5 أمتار."]],
+   check:{q:"How ___ is this basketball player? — He's 213 centimetres.",o:["tall","far","deep"],why:"لطول الإنسان نسأل How tall."}},
+  {en:"Giving personal information",ar:"إعطاء معلومات شخصية (حوار)",exp:"عند الاشتراك في نادٍ تُسأل هذه الأسئلة. لاحظ أننا نقرأ رقم الهاتف رقماً رقماً، و 0 تُنطق oh، والرقمان المتشابهان double.",rule:"I'm interested in joining the Chess Club.",
+   ex:[["How do you spell your last name?","كيف تتهجّى اسم عائلتك؟"],["What's your date of birth? — 27 March 2014.","ما تاريخ ميلادك؟"],["What's your home phone number? — oh-three-oh, double-seven, seven, oh, six.","ما رقم هاتف المنزل؟"]],
+   check:{q:"What's your date of birth?",o:["27 March 2014","030 77706","Amer"],why:"date of birth تعني تاريخ الميلاد."}},
+  {en:"Saying plurals",ar:"نطق s في الجمع",exp:"الجمع ينطق بثلاث طرق: /ɪz/ بعد s, sh, ch, x (houses, sandwiches). و /s/ بعد p, t, k (comets, telescopes). و /z/ بعد باقي الأصوات (stars, computers).",rule:"/ɪz/ houses · /s/ comets · /z/ stars",
+   ex:[["houses · sandwiches · boxes","صوت /ɪz/"],["comets · rockets · telescopes","صوت /s/"],["stars · computers · moons","صوت /z/"]],
+   check:{q:"Which plural ends with /ɪz/?",o:["sandwiches","stars","comets"],why:"sandwich تنتهي بـ ch، فجمعها يُنطق /ɪz/."}}
+ ],
+ sentences:[["Will you wear trainers tomorrow?","هل ستلبس حذاءً رياضياً غداً؟"],["Shahad will wear a spacesuit costume.","شهد ستلبس زي بدلة فضاء."],["How far is it from Muscat to Salalah?","كم المسافة من مسقط إلى صلالة؟"],["There are eight planets in our solar system.","هناك ثمانية كواكب في مجموعتنا الشمسية."],["What's your date of birth?","ما تاريخ ميلادك؟"]],
+ sort:{en:"Plural sounds",ar:"صنّف حسب نطق الجمع",buckets:[["/ɪz/","صوت إز"],["/s/","صوت س"],["/z/","صوت ز"]],items:[["houses",0],["sandwiches",0],["buses",0],["boxes",0],["comets",1],["rockets",1],["telescopes",1],["books",1],["stars",2],["computers",2],["moons",2],["phones",2]]},
+ quiz:[
+  {q:"Astronauts wear a ___ in space.",o:["spacesuit","telescope","satellite"],why:"spacesuit هي بدلة الفضاء."},
+  {q:"You can use a ___ to look at the stars.",o:["telescope","rocket","comet"],why:"telescope هو التلسكوب لرؤية النجوم."},
+  {q:"The planets move around the ___.",o:["Sun","Moon","comet"],why:"الكواكب تدور حول الشمس Sun."},
+  {q:"Tomorrow I ___ bake a cake.",o:["will","am will","wills"],why:"للمستقبل: will + الفعل، ولا تتغير will."},
+  {q:"Will you post a letter tomorrow? — No, I ___.",o:["won't","don't","willn't"],why:"won't هي اختصار will not."},
+  {q:"How ___ is Jabal Shams?",o:["high","far","deep"],why:"لارتفاع الجبل نسأل How high."},
+  {q:"How ___ is it from Muscat to Salalah by car?",o:["far","tall","wide"],why:"للمسافة بين مكانين نسأل How far."},
+  {q:"How ___ is the Pacific Ocean at its deepest point?",o:["deep","tall","far"],why:"للعمق نسأل How deep."},
+  {q:"50,000 = ___",o:["fifty thousand","five thousand","five hundred thousand"],why:"50,000 = fifty thousand."},
+  {q:"1,000,000 = ___",o:["a million","a thousand","a hundred thousand"],why:"مليون = a million."},
+  {q:"4,250 = ___",o:["four thousand, two hundred and fifty","forty-two thousand and fifty","four hundred and twenty-five"],why:"4 آلاف + 250 = four thousand, two hundred and fifty."},
+  {q:"How do you spell your last name?",o:["A-L-H-A-R-T-H-I","27 March 2014","I'm interested in chess."],why:"spell = تهجّى، فالإجابة حروف الاسم."}
+ ]
+},
+{
+ id:"u4", num:"4", title:"Off to the shops", ar:"إلى المحلات", emoji:"🛍️", color:"leaf",
+ desc:"أسماء المحلات، who / which / where، كلمات المال، have to، والسؤال عن السعر.",
+ vocab:[["butcher's","محل اللحوم (الجزّار)","🥩"],["greengrocer's","محل الخضار والفواكه","🥕"],["fishmonger's","محل السمك","🐟"],["pharmacy","صيدلية","💊"],["kiosk","كشك","📰"],["jeweller's","محل المجوهرات","💍"],["sports shop","محل رياضي","⚽"],["gift shop","محل الهدايا","🎁"],["phone shop","محل الهواتف","📱"],["corner shop","بقالة صغيرة","🏪"],["shoe shop","محل الأحذية","👞"],["toy shop","محل الألعاب","🧸"],["pocket money","المصروف","🪙"],["purse","محفظة نسائية","👛"],["wallet","محفظة","👝"],["money box","حصّالة","🐷"],["buy","يشتري","🛒"],["sell","يبيع","🏷️"],["spend","يصرف","💸"],["save","يدّخر","🏦"]],
+ lessons:[
+  {en:"Shops",ar:"أسماء المحلات",exp:"بعض أسماء المحلات تنتهي بـ ’s لأنها اختصار: the greengrocer's = the greengrocer's shop أي «محل بائع الخضار». لذلك نكتب butcher's و fishmonger's و jeweller's، لكن pharmacy و kiosk بدون ’s.",rule:"the greengrocer's = the greengrocer's shop",
+   ex:[["Yesterday, we went to the butcher's to buy some meat.","ذهبنا أمس إلى الجزار لشراء اللحم."],["My dad goes to the fishmonger's to buy some fish.","يذهب أبي إلى محل السمك لشراء السمك."],["My mum often goes to the kiosk to buy a magazine.","تذهب أمي غالباً إلى الكشك لشراء مجلة."]],
+   check:{q:"You buy medicine at the ___.",o:["pharmacy","jeweller's","kiosk"],why:"الدواء يُشترى من الصيدلية pharmacy."}},
+  {en:"who, which, where",ar:"الأسماء الموصولة",exp:"نصل بين جملتين: who للأشخاص (الذي/التي)، which للأشياء (الذي/التي)، where للأماكن (حيث).",rule:"person → who · thing → which · place → where",
+   ex:[["It's the man who lives opposite.","إنه الرجل الذي يسكن في المقابل."],["This is the necklace which my parents gave me.","هذه القلادة التي أهداني إياها والداي."],["A shoe shop is the shop where you can buy shoes.","محل الأحذية هو المحل حيث تشتري الأحذية."]],
+   check:{q:"The Earth is the planet ___ we live.",o:["where","who","which"],why:"نتكلم عن مكان نعيش فيه، فنستخدم where."}},
+  {en:"Money words",ar:"كلمات المال",exp:"get pocket money = يأخذ المصروف. نضع النقود في purse أو wallet، ونجمعها في money box (حصّالة). buy = يشتري، sell = يبيع، spend = يصرف، save = يدّخر. وعملة عُمان هي الريال العماني OMR.",rule:"I save my pocket money in a money box.",
+   ex:[["Some children get pocket money from their mum or dad.","بعض الأطفال يأخذون مصروفاً من أمهم أو أبيهم."],["You take your purse or your wallet to carry the money.","تأخذ محفظتك لتحمل النقود."],["The shop sells chocolates.","المحل يبيع الشوكولاتة."]],
+   check:{q:"I don't want to spend my money. I want to ___ it.",o:["save","sell","buy"],why:"عكس الصرف spend هو الادخار save."}},
+  {en:"have to / don't have to",ar:"يجب / لا يجب (ليس ضرورياً)",exp:"have to تعني «يجب عليّ». مع He / She / It نقول has to. و don't have to (أو doesn't have to) تعني «ليس ضرورياً». السؤال: Do you have to …? / Does she have to …?",rule:"I have to tidy my room. · She doesn't have to go.",
+   ex:[["I have to tidy my room tomorrow.","يجب أن أرتب غرفتي غداً."],["My dad has to go to the pharmacy.","يجب على أبي الذهاب إلى الصيدلية."],["I don't have to go to the shops.","ليس ضرورياً أن أذهب إلى المحلات."]],
+   check:{q:"She ___ go to school today. It's Friday.",o:["doesn't have to","don't have to","haven't to"],why:"مع She نستخدم doesn't have to."}},
+  {en:"Asking for a price",ar:"السؤال عن السعر (حوار)",exp:"جمل مهمة في المحل: Can I look at …? (هل أستطيع رؤية…؟) ، How much is it? (بكم؟) ، I'll have that one, please. (سآخذ هذه من فضلك).",rule:"How much is it? — It's seven rials.",
+   ex:[["Can I look at the football which is in the window, please?","هل أستطيع رؤية الكرة التي في الواجهة من فضلك؟"],["Which football would you like? — The one which is blue and white.","أي كرة تريد؟ — التي لونها أزرق وأبيض."],["OK, that's a good idea. I'll have that one, please.","حسناً، فكرة جيدة. سآخذ هذه من فضلك."]],
+   check:{q:"How much is it?",o:["It's six rials.","It's blue and white.","Here it is."],why:"How much يسأل عن السعر."}},
+  {en:"The /ʒ/ sound",ar:"الصوت /ʒ/",exp:"الصوت /ʒ/ يشبه صوت «ج» الشامية الناعمة. نسمعه في: usually, television, measure, visual, decision. انتبه: station و ocean و machine فيها صوت /ʃ/ مثل «ش».",rule:"usually · television · measure",
+   ex:[["usually · television · decision","صوت /ʒ/"],["measure · visual","صوت /ʒ/"],["station · ocean · machine","صوت /ʃ/ (ش)"]],
+   check:{q:"Which word has the /ʒ/ sound?",o:["television","station","ocean"],why:"television فيها /ʒ/، أما station و ocean ففيها /ʃ/."}}
+ ],
+ sentences:[["A shoe shop is the shop where you can buy shoes.","محل الأحذية هو المحل حيث تشتري الأحذية."],["That's the woman who works at the corner shop.","تلك المرأة التي تعمل في البقالة."],["I have to tidy my room tomorrow.","يجب أن أرتب غرفتي غداً."],["She doesn't have to go to the greengrocer's.","ليس ضرورياً أن تذهب إلى محل الخضار."],["How much is it?","بكم هذا؟"]],
+ sort:{en:"who, which or where?",ar:"صنّف: شخص، شيء، أم مكان؟",buckets:[["who","للأشخاص"],["which","للأشياء"],["where","للأماكن"]],items:[["the teacher",0],["the boy",0],["my sister",0],["the shop assistant",0],["the necklace",1],["the tablet",1],["the phone case",1],["the football",1],["the shop",2],["the house",2],["the park",2],["the town",2]]},
+ quiz:[
+  {q:"You buy meat at the ___.",o:["butcher's","fishmonger's","pharmacy"],why:"اللحم من الجزار butcher's."},
+  {q:"You buy a magazine at the ___.",o:["kiosk","butcher's","shoe shop"],why:"المجلات والصحف تُباع في الكشك kiosk."},
+  {q:"I went to the ___ to buy a necklace for my granny.",o:["jeweller's","greengrocer's","sports shop"],why:"القلائد والخواتم في محل المجوهرات jeweller's."},
+  {q:"That's the woman ___ works at the corner shop.",o:["who","which","where"],why:"نتكلم عن شخص، فنستخدم who."},
+  {q:"This is the necklace ___ my parents gave me.",o:["which","who","where"],why:"القلادة شيء، فنستخدم which."},
+  {q:"A shoe shop is the shop ___ you can buy shoes.",o:["where","who","which"],why:"المحل مكان، فنستخدم where."},
+  {q:"My dad ___ go to the pharmacy to buy some medicine.",o:["has to","have to","don't have to"],why:"مع He / She نستخدم has to."},
+  {q:"I've got a lot of pocket money, so I ___ save any money.",o:["don't have to","doesn't have to","has to"],why:"مع I نستخدم don't have to (ليس ضرورياً)."},
+  {q:"___ she have to stay at home?",o:["Does","Do","Is"],why:"مع she نبدأ السؤال بـ Does."},
+  {q:"How much is it?",o:["It's seven rials.","It's blue and white.","Here it is."],why:"How much سؤال عن السعر."},
+  {q:"You keep your coins in a ___ at home.",o:["money box","kiosk","butcher's"],why:"money box هي الحصّالة."},
+  {q:"Which word has the /ʒ/ sound?",o:["television","station","machine"],why:"television فيها /ʒ/، والكلمتان الأخريان فيهما /ʃ/."}
+ ]
+},
+{
+ id:"bo", num:"★", title:"Bo's Learning Club", ar:"نادي التعلّم: الاقتراحات", emoji:"💡", color:"peach",
+ desc:"كيف نقترح نشاطاً ونرد على الاقتراح: How about / What about + ing.",
+ vocab:[["make a pizza","يصنع بيتزا","🍕"],["bake a cake","يخبز كعكة","🎂"],["do an experiment","يجري تجربة","🧪"],["build a robot","يبني روبوتاً","🤖"],["make a rocket","يصنع صاروخاً","🚀"],["visit a toy shop","يزور محل الألعاب","🧸"],["idea","فكرة","💡"],["shopping","التسوّق","🛍️"],["museum","متحف","🏛️"],["Science","العلوم","🔬"],["hungry","جائع","😋"],["juggle","يلعب الخفّة","🤹"]],
+ lessons:[
+  {en:"Making suggestions",ar:"تقديم اقتراح",exp:"لنقترح نشاطاً نقول How about أو What about ثم الفعل مع ing. ولنطلب اقتراحاً نقول What shall we do? (ماذا سنفعل؟).",rule:"How about making a pizza?",
+   ex:[["What shall we do?","ماذا سنفعل؟"],["How about baking a cake?","ما رأيك أن نخبز كعكة؟"],["What about building a robot?","ما رأيك أن نبني روبوتاً؟"]],
+   check:{q:"What about ___ a fishmonger's?",o:["visiting","visit","visits"],why:"بعد What about يأتي الفعل مع ing."}},
+  {en:"Answering suggestions",ar:"الرد على الاقتراح",exp:"للموافقة: Yes, that's a great idea! (نعم، فكرة رائعة!). للرفض بلطف: No, I don't like … ثم اقترح شيئاً آخر. وللبدء: OK, let's … (هيا بنا…).",rule:"Yes, that's a great idea! · OK, let's go shopping.",
+   ex:[["How about doing an experiment? — Yes, I like Science.","ما رأيك بتجربة علمية؟ — نعم، أحب العلوم."],["What about visiting a fishmonger's? — No, I don't like fish.","ما رأيك بزيارة محل السمك؟ — لا، لا أحب السمك."],["OK, let's go shopping.","حسناً، هيا نذهب للتسوق."]],
+   check:{q:"How about baking a cake? — Yes, I'm hungry. ___ bake!",o:["Let's","Lets to","We let"],why:"let's + الفعل = هيا بنا."}}
+ ],
+ sentences:[["What shall we do?","ماذا سنفعل؟"],["How about baking a cake?","ما رأيك أن نخبز كعكة؟"],["What about doing an experiment?","ما رأيك أن نجري تجربة؟"],["Yes, that's a great idea!","نعم، هذه فكرة رائعة!"],["OK, let's go shopping.","حسناً، هيا نذهب للتسوق."]],
+ sort:{en:"make, do, build or bake?",ar:"أي فعل يناسب الكلمة؟",buckets:[["make","يصنع"],["do","يفعل / يجري"],["build","يبني"],["bake","يخبز"]],items:[["a pizza",0],["a rocket",0],["a sandwich",0],["a face",0],["an experiment",1],["homework",1],["a robot",2],["a model",2],["a cake",3],["bread",3]]},
+ quiz:[
+  {q:"How about ___ a cake?",o:["baking","bake","bakes"],why:"بعد How about يأتي الفعل مع ing."},
+  {q:"What about ___ an experiment?",o:["doing","make","do"],why:"نقول do an experiment، ومع What about تصبح doing."},
+  {q:"What ___ we do?",o:["shall","are","does"],why:"What shall we do? لطلب اقتراح."},
+  {q:"How about visiting a fishmonger's? — No, I don't like ___.",o:["fish","cakes","robots"],why:"محل السمك يبيع fish، فالرفض المنطقي: I don't like fish."},
+  {q:"Yes, that's a great ___!",o:["idea","ideas","idear"],why:"a great idea = فكرة رائعة (مفرد بعد a)."},
+  {q:"OK, ___ go shopping.",o:["let's","lets to","we let"],why:"let's + الفعل = هيا بنا."}
+ ]
+}
+];
+
+/* ================= HELPERS ================= */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const shuffle = a => { a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const pick = (a,n) => shuffle(a).slice(0,n);
+const PRAISE = ["أحسنت! Great job! 🌟","رائع! Excellent! 🎉","ممتاز! Well done! 👏","صحيح! Super! ⭐","برافو! Brilliant! 🥳"];
+const praise = () => PRAISE[Math.floor(Math.random()*PRAISE.length)];
+const unitById = id => UNITS.find(u=>u.id===id);
+
+/* storage */
+const KEY="g5eng-v1";
+let P={name:"",mute:false,units:{},final:0,asked:false};
+try{const raw=localStorage.getItem(KEY); if(raw) P=Object.assign(P,JSON.parse(raw));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(P));}catch(e){}}
+function U(id){ if(!P.units[id]) P.units[id]={learn:false,games:{},quiz:0}; return P.units[id]; }
+function starsOf(id){ const u=U(id); return (u.learn?1:0)+(Object.keys(u.games).length>=3?1:0)+(u.quiz>=70?1:0); }
+function finalStars(){ const f=P.final||0; return f>=90?3:f>=70?2:f>=50?1:0; }
+function starHTML(n){ return `<span class="stars" aria-label="${n} من 3 نجوم">${[0,1,2].map(i=>`<span class="${i<n?"":"off"}">⭐</span>`).join("")}</span>`; }
+
+/* sounds */
+let AC=null;
+function tone(fs){ if(P.mute) return; try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); const t=AC.currentTime;
+  fs.forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain(); o.type="sine"; o.frequency.value=f; const s=t+i*.11;
+  g.gain.setValueAtTime(.0001,s); g.gain.exponentialRampToValueAtTime(.14,s+.02); g.gain.exponentialRampToValueAtTime(.0001,s+.24);
+  o.connect(g); g.connect(AC.destination); o.start(s); o.stop(s+.26);}); }catch(e){} }
+const sGood=()=>tone([660,880]), sBad=()=>tone([300,230]), sWin=()=>tone([523,659,784,1046]);
+
+/* speech */
+let VOICE=null;
+function pickVoice(){ try{ const vs=speechSynthesis.getVoices(); VOICE=vs.find(v=>/en-GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null; }catch(e){} }
+if("speechSynthesis" in window){ pickVoice(); try{speechSynthesis.onvoiceschanged=pickVoice;}catch(e){} }
+function say(t){ try{ if(!("speechSynthesis" in window)) return; speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(String(t).replace(/_{2,}/g," blank ").replace(/[↔→·]/g,", ").replace(/\/ɪd\//g,"id").replace(/\//g," "));
+  u.lang="en-GB"; if(VOICE) u.voice=VOICE; u.rate=.82; speechSynthesis.speak(u);}catch(e){} }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-say]"); if(b) say(b.dataset.say); });
+
+/* confetti */
+function burst(el){ if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const r=el?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
+  const x=r.left+r.width/2, y=r.top+r.height/2; const E=["⭐","✨","🎉","🌟","💫"];
+  for(let i=0;i<12;i++){ const s=document.createElement("span"); s.className="spark"; s.textContent=E[i%E.length];
+    s.style.left=x+"px"; s.style.top=y+"px"; const a=Math.random()*Math.PI*2, d=60+Math.random()*90;
+    s.style.setProperty("--dx",Math.cos(a)*d+"px"); s.style.setProperty("--dy",Math.sin(a)*d-40+"px"); s.style.setProperty("--rot",(Math.random()*360)+"deg");
+    document.body.appendChild(s); setTimeout(()=>s.remove(),1100); } }
+
+/* ================= APP ================= */
+const app=$("#app");
+let S={view:"home"};
+function go(v){ S=v; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+function updateTop(){
+  const got=UNITS.reduce((s,u)=>s+starsOf(u.id),0)+finalStars();
+  $("#starCount").textContent="⭐ "+got;
+  $("#muteBtn").textContent=P.mute?"🔕":"🔔";
+}
+function render(){ updateTop(); if(S.view==="home") renderHome(); else if(S.view==="unit") renderUnit(); else if(S.view==="final") renderFinal(); }
+
+$("#homeBtn").onclick=()=>go({view:"home"});
+$("#muteBtn").onclick=()=>{ P.mute=!P.mute; save(); updateTop(); if(!P.mute) sGood(); };
+$("#resetBtn").onclick=()=>{ if(confirm("هل تريد مسح كل النجوم والتقدّم؟")){ const n=P.name; P={name:n,mute:P.mute,units:{},final:0,asked:true}; save(); go({view:"home"}); } };
+
+/* ---------- HOME ---------- */
+function renderHome(){
+  const total=UNITS.length*3+3;
+  const got=UNITS.reduce((s,u)=>s+starsOf(u.id),0)+finalStars();
+  app.innerHTML=`
+  <section class="hero">
+    <div class="owl" aria-hidden="true">🦉</div>
+    <div>
+      <p class="hello en">Hello${P.name?", "+esc(P.name):""}! 👋</p>
+      <h1>منصة الإنجليزي للصف الخامس</h1>
+      <p class="sub">نتعلم كتاب Team Together 5A بالشرح والألعاب والاختبارات، خطوة بخطوة حتى الاختبار النهائي.</p>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${got}"><span style="width:${Math.round(got/total*100)}%"></span></div>
+      <p class="barlbl">جمعت ${got} من ${total} نجمة ⭐</p>
+    </div>
+  </section>
+  <div class="how">
+    <div><b>📖</b>اقرأ الشرح واستمع للنطق</div>
+    <div><b>🎮</b>العب لتحفظ الكلمات والقواعد</div>
+    <div><b>✅</b>حلّ اختبار الوحدة لتأخذ النجمة</div>
+    <div><b>🏆</b>وفي النهاية: الاختبار النهائي</div>
+  </div>
+  <h2 class="pathtitle">طريق التعلّم <span class="en">Learning path</span></h2>
+  <ol class="path">
+    ${UNITS.map((u,i)=>`<li class="stone s${i%4}" style="--c:var(--${u.color})"><button data-unit="${u.id}">
+      <span class="num">${u.num}</span>
+      <span><span class="t en">${esc(u.title)}</span><span class="ar">${u.emoji} ${esc(u.ar)}</span></span>
+      ${starHTML(starsOf(u.id))}</button></li>`).join("")}
+    <li class="stone s${UNITS.length%4}" style="--c:var(--sun)"><button data-final>
+      <span class="num">🏆</span>
+      <span><span class="t en">Final test</span><span class="ar">الاختبار النهائي</span></span>
+      ${starHTML(finalStars())}</button></li>
+  </ol>`;
+  $$("[data-unit]",app).forEach(b=>b.onclick=()=>go({view:"unit",unit:b.dataset.unit,tab:"learn"}));
+  $("[data-final]",app).onclick=()=>go({view:"final"});
+}
+
+/* ---------- UNIT ---------- */
+function renderUnit(){
+  const u=unitById(S.unit), tab=S.tab||"learn";
+  app.innerHTML=`
+  <button class="back" id="bk">→ الرئيسية</button>
+  <header class="uhero" style="--c:var(--${u.color})">
+    <div class="big" aria-hidden="true">${u.emoji}</div>
+    <div>
+      <h1 class="en">${u.num==="★"?"":"Unit "+u.num+" · "}${esc(u.title)}</h1>
+      <p class="ar">${esc(u.ar)} ${starHTML(starsOf(u.id))}</p>
+      <p class="d">${esc(u.desc)}</p>
+    </div>
+  </header>
+  <div class="tabs" role="tablist" style="--c:var(--${u.color})">
+    ${[["learn","📖 الشرح"],["games","🎮 الألعاب"],["quiz","✅ الاختبار"]].map(([k,l])=>`<button role="tab" aria-selected="${tab===k}" data-tab="${k}">${l}</button>`).join("")}
+  </div>
+  <div class="pane" id="pane" style="--c:var(--${u.color})"></div>`;
+  $("#bk").onclick=()=>go({view:"home"});
+  $$("[data-tab]",app).forEach(b=>b.onclick=()=>{ S.tab=b.dataset.tab; S.game=null; render(); });
+  const pane=$("#pane");
+  if(tab==="learn") renderLearn(pane,u);
+  else if(tab==="games") S.game?GAMES[S.game].fn(pane,u):renderGames(pane,u);
+  else renderQuizIntro(pane,u);
+}
+
+function renderLearn(pane,u){
+  if(!U(u.id).learn){ U(u.id).learn=true; save(); updateTop(); }
+  pane.innerHTML=`
+  <h2 class="sec">🗂️ كلمات الوحدة <small style="font-weight:500;color:var(--muted);font-size:15px">— اضغط على الكلمة لتسمعها</small></h2>
+  <div class="vocab">${u.vocab.map(v=>`<button class="chip" data-say="${esc(v[0])}"><span class="e">${v[2]}</span><b class="en">${esc(v[0])}</b><small>${esc(v[1])}</small></button>`).join("")}</div>
+  <h2 class="sec">📖 الدروس</h2>
+  ${u.lessons.map((l,i)=>`
+   <article class="lesson">
+    <div class="lhead"><span class="lnum">${i+1}</span><div><h3 class="en">${esc(l.en)}</h3><p>${esc(l.ar)}</p></div></div>
+    <p class="exp">${esc(l.exp)}</p>
+    <div class="rule en"><span>${esc(l.rule)}</span><button class="say" data-say="${esc(l.rule)}" aria-label="استمع">🔊</button></div>
+    <ul class="ex">${l.ex.map(e=>`<li><button class="say" data-say="${esc(e[0])}" aria-label="استمع">🔊</button><div><span class="en">${esc(e[0])}</span><span class="ar">${esc(e[1])}</span></div></li>`).join("")}</ul>
+    <div class="check" data-i="${i}">
+      <p class="ttl">🤔 جرّب بنفسك</p>
+      <p class="q en">${fmtBlank(l.check.q)}</p>
+      <div class="opts">${shuffle(l.check.o).map(o=>`<button class="opt en" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+      <p class="fb" aria-live="polite"></p>
+    </div>
+   </article>`).join("")}
+  <div class="row"><button class="btn" id="toGames">الآن هيا نلعب! 🎮</button></div>`;
+  $$(".check",pane).forEach(c=>{
+    const l=u.lessons[+c.dataset.i];
+    $$(".opt",c).forEach(b=>b.onclick=()=>{
+      const fb=$(".fb",c);
+      if(b.dataset.o===l.check.o[0]){ $$(".opt",c).forEach(x=>x.disabled=true); b.classList.add("ok"); fb.className="fb g"; fb.textContent=praise()+" "+l.check.why; sGood(); burst(b); }
+      else { b.classList.add("no"); b.disabled=true; fb.className="fb b"; fb.textContent="ليس تماماً، اقرأ الشرح مرة أخرى وجرّب 💪"; sBad(); }
+    });
+  });
+  $("#toGames",pane).onclick=()=>{ S.tab="games"; S.game=null; render(); window.scrollTo({top:0,behavior:"smooth"}); };
+}
+function fmtBlank(q){ return esc(q).replace(/_{3}/g,'<span class="blank">___</span>'); }
+
+/* ---------- GAMES ---------- */
+const GAMES={
+  match:{e:"🔗",ar:"لعبة التوصيل",en:"Word Match",d:"اختر كلمة إنجليزية ثم صِلها بمعناها العربي.",fn:gMatch},
+  listen:{e:"🎧",ar:"اسمع واختر",en:"Listen & Choose",d:"استمع للكلمة واختر معناها، وأعد الاستماع متى أردت.",fn:gListen},
+  grammar:{e:"🎯",ar:"تحدّي القواعد",en:"Grammar Challenge",d:"أكمل الجملة وتعلّم من الشرح، ثم حاول مرة أخرى.",fn:gGrammar},
+  memory:{e:"🃏",ar:"لعبة الذاكرة",en:"Memory",d:"طابِق الكلمة الإنجليزية مع معناها.",fn:gMemory},
+  pop:{e:"🎈",ar:"اختر الكلمة",en:"Word Pop",d:"انظر للصورة والمعنى واختر الكلمة الصحيحة.",fn:gPop},
+  order:{e:"🧩",ar:"رتّب الجملة",en:"Sentence Builder",d:"اضغط الكلمات بالترتيب الصحيح.",fn:gOrder},
+  sort:{e:"🗂️",ar:"صنّف الكلمات",en:"Sorting",d:"ضع كل كلمة في مجموعتها.",fn:gSort},
+  spell:{e:"🐝",ar:"تهجئة الكلمات",en:"Spelling Bee",d:"رتّب الحروف لتكتب الكلمة.",fn:gSpell}
+};
+function renderGames(pane,u){
+  const done=U(u.id).games;
+  pane.innerHTML=`<h2 class="sec">🎮 اختر لعبة <small style="font-weight:500;color:var(--muted);font-size:15px">— العب ٣ ألعاب لتحصل على نجمة</small></h2>
+  <div class="games">${Object.entries(GAMES).map(([k,g])=>`<button class="gcard" data-g="${k}">${done[k]?'<span class="done">✔ لعبتها</span>':""}<span class="e">${g.e}</span><b>${g.ar}</b><span class="en">${g.en}${k==="sort"?" · "+esc(u.sort.en):""}</span><p>${k==="sort"?esc(u.sort.ar):g.d}</p></button>`).join("")}</div>`;
+  $$("[data-g]",pane).forEach(b=>b.onclick=()=>{ S.game=b.dataset.g; render(); });
+}
+function gHead(k,u,help){
+  const g=GAMES[k];
+  return `<button class="back" data-games>→ كل الألعاب</button>
+  <div class="ghead"><span class="e">${g.e}</span><div><h2>${g.ar} <span class="en" style="font-size:16px;color:var(--muted)">${g.en}</span></h2><p>${help||g.d}</p></div></div>`;
+}
+function bindGHead(pane){ const b=$("[data-games]",pane); if(b) b.onclick=()=>{ S.game=null; render(); }; }
+function prog(i,n){ return `<div class="prog"><span style="width:${Math.round(i/n*100)}%"></span></div>`; }
+function finishGame(pane,u,key,scoreText){
+  U(u.id).games[key]=true; save(); updateTop(); sWin();
+  pane.innerHTML=`${gHead(key,u)}<div class="stage end"><div class="bigemo">🎉</div><h2>أحسنت! Well done!</h2><p>${scoreText}</p>
+  <div class="row"><button class="btn" id="again">العب مرة أخرى 🔁</button><button class="btn ghost" id="other">لعبة أخرى 🎮</button></div></div>`;
+  bindGHead(pane); burst($(".bigemo",pane));
+  $("#again",pane).onclick=()=>GAMES[key].fn(pane,u);
+  $("#other",pane).onclick=()=>{ S.game=null; render(); };
+}
+
+function gMemory(pane,u){
+  const words=pick(u.vocab,6);
+  const cards=shuffle(words.flatMap((w,i)=>[{id:i,kind:"en",w},{id:i,kind:"ar",w}]));
+  let open=[],matched=0,moves=0,lock=false;
+  pane.innerHTML=gHead("memory",u,"اقلب بطاقتين: الكلمة الإنجليزية ومعناها. إذا تطابقتا تبقيان مفتوحتين!")+
+  `<div class="stage"><div class="mem">${cards.map((c,k)=>`<button class="card" data-k="${k}" aria-label="بطاقة ${k+1}"><span class="face front">?</span><span class="face cback">${c.kind==="en"?`<b class="en">${esc(c.w[0])}</b>`:`<span class="emo">${c.w[2]}</span><small>${esc(c.w[1])}</small>`}</span></button>`).join("")}</div>
+  <p class="meta">المحاولات: <b id="mv">0</b></p></div>`;
+  bindGHead(pane);
+  $$(".card",pane).forEach(b=>b.onclick=()=>{
+    if(lock||b.classList.contains("flip")) return;
+    const c=cards[+b.dataset.k]; b.classList.add("flip"); if(c.kind==="en") say(c.w[0]);
+    open.push([b,c]);
+    if(open.length===2){
+      moves++; $("#mv",pane).textContent=moves;
+      const [[b1,c1],[b2,c2]]=open; open=[];
+      if(c1.id===c2.id){ b1.classList.add("done"); b2.classList.add("done"); sGood(); burst(b2); matched++;
+        if(matched===words.length) setTimeout(()=>finishGame(pane,u,"memory",`أنهيت اللعبة في ${moves} محاولة.`),700); }
+      else { lock=true; sBad(); setTimeout(()=>{ b1.classList.remove("flip"); b2.classList.remove("flip"); lock=false; },950); }
+    }
+  });
+}
+
+function gPop(pane,u){
+  const rounds=pick(u.vocab,Math.min(8,u.vocab.length)); let i=0,score=0;
+  function show(){
+    if(i>=rounds.length) return finishGame(pane,u,"pop",`أجبت من المحاولة الأولى على ${score} من ${rounds.length}.`);
+    const w=rounds[i], opts=shuffle([w,...pick(u.vocab.filter(x=>x!==w),3)]); let tried=false;
+    pane.innerHTML=gHead("pop",u)+`<div class="stage">${prog(i,rounds.length)}
+      <div class="prompt"><div class="bigemo">${w[2]}</div><p class="ar big">${esc(w[1])}</p></div>
+      <div class="bubbles">${opts.map(o=>`<button class="bub en" data-w="${esc(o[0])}">${esc(o[0])}</button>`).join("")}</div>
+      <p class="fb" aria-live="polite" style="text-align:center"></p></div>`;
+    bindGHead(pane);
+    $$(".bub",pane).forEach(b=>b.onclick=()=>{
+      const fb=$(".fb",pane);
+      if(b.dataset.w===w[0]){ $$(".bub",pane).forEach(x=>x.disabled=true); b.disabled=false; b.classList.add("ok"); if(!tried) score++;
+        sGood(); say(w[0]); burst(b); fb.className="fb g"; fb.textContent=praise(); setTimeout(()=>{i++;show();},1000); }
+      else { tried=true; b.classList.add("no"); b.disabled=true; sBad(); fb.className="fb b"; fb.textContent="حاول مرة أخرى 💪"; }
+    });
+  }
+  show();
+}
+
+function gOrder(pane,u){
+  const list=shuffle(u.sentences); let i=0,score=0;
+  function show(){
+    if(i>=list.length) return finishGame(pane,u,"order",`رتّبت ${score} من ${list.length} جمل من المحاولة الأولى.`);
+    const [sent,ar]=list[i], toks=sent.split(" ");
+    let pool=shuffle(toks.map((t,k)=>({t,k})));
+    if(pool.map(o=>o.t).join(" ")===sent) pool=pool.reverse();
+    let ans=[],wrong=0;
+    function draw(msg,cls){
+      pane.innerHTML=gHead("order",u)+`<div class="stage">${prog(i,list.length)}
+        <p class="hint">${esc(ar)}</p>
+        <button class="listen" data-say="${esc(sent)}">🔊 استمع للجملة</button>
+        <div class="line en" id="line">${ans.length?ans.map((o,j)=>`<button class="tok in" data-j="${j}">${esc(o.t)}</button>`).join(""):'<span class="ph">اضغط الكلمات بالترتيب…</span>'}</div>
+        <div class="pool en">${pool.map((o,j)=>`<button class="tok" data-p="${j}">${esc(o.t)}</button>`).join("")}</div>
+        <div class="row"><button class="btn" id="chk" ${pool.length?"disabled":""}>تحقّق ✔</button></div>
+        <p class="fb ${cls||""}" aria-live="polite" style="text-align:center">${msg||""}</p></div>`;
+      bindGHead(pane);
+      $$("[data-p]",pane).forEach(b=>b.onclick=()=>{ ans.push(pool.splice(+b.dataset.p,1)[0]); draw(); });
+      $$("[data-j]",pane).forEach(b=>b.onclick=()=>{ pool.push(ans.splice(+b.dataset.j,1)[0]); draw(); });
+      $("#chk",pane).onclick=()=>{
+        if(ans.map(o=>o.t).join(" ")===sent){ if(!wrong) score++; sGood(); say(sent); const ln=$("#line",pane); ln.classList.add("okline"); burst(ln);
+          $(".fb",pane).className="fb g"; $(".fb",pane).textContent=praise(); $("#chk",pane).disabled=true; setTimeout(()=>{i++;show();},1300); }
+        else { wrong++; sBad(); const ln=$("#line",pane); ln.classList.remove("no"); void ln.offsetWidth; ln.classList.add("no");
+          const fb=$(".fb",pane); fb.className="fb b";
+          fb.innerHTML=wrong>=2?`تلميح: الجملة تبدأ بـ <b class="en">${esc(toks[0])}</b> — اضغط على الكلمات لإرجاعها.`:"قريب! اضغط على كلمة لإرجاعها وجرّب ترتيباً آخر 💪"; }
+      };
+    }
+    draw();
+  }
+  show();
+}
+
+function gSort(pane,u){
+  const s=u.sort, items=shuffle(s.items); let i=0,score=0;
+  function show(){
+    if(i>=items.length) return finishGame(pane,u,"sort",`صنّفت ${score} من ${items.length} من المحاولة الأولى.`);
+    const [txt,b]=items[i]; let tried=false;
+    pane.innerHTML=gHead("sort",u,s.ar)+`<div class="stage">${prog(i,items.length)}
+      <div class="sortitem"><span class="en">${esc(txt)}</span><button class="say" data-say="${esc(txt)}" aria-label="استمع">🔊</button></div>
+      <div class="buckets">${s.buckets.map((bk,k)=>`<button class="bucket" data-k="${k}"><b class="en">${esc(bk[0])}</b><small>${esc(bk[1])}</small></button>`).join("")}</div>
+      <p class="fb" aria-live="polite" style="text-align:center"></p></div>`;
+    bindGHead(pane);
+    $$(".bucket",pane).forEach(bt=>bt.onclick=()=>{
+      const fb=$(".fb",pane);
+      if(+bt.dataset.k===b){ $$(".bucket",pane).forEach(x=>x.disabled=true); bt.classList.add("ok"); if(!tried) score++; sGood(); burst(bt);
+        fb.className="fb g"; fb.textContent=praise(); setTimeout(()=>{i++;show();},850); }
+      else { tried=true; bt.classList.add("no"); sBad(); fb.className="fb b"; fb.textContent="ليست هنا، جرّب مجموعة أخرى 🤔"; setTimeout(()=>bt.classList.remove("no"),500); }
+    });
+  }
+  show();
+}
+
+function gSpell(pane,u){
+  const pool=u.vocab.filter(w=>/^[A-Za-z]{3,10}$/.test(w[0]));
+  const words=pick(pool,Math.min(6,pool.length)); let i=0,score=0;
+  function show(){
+    if(i>=words.length) return finishGame(pane,u,"spell",`كتبت ${score} من ${words.length} كلمات من المحاولة الأولى.`);
+    const w=words[i], target=w[0];
+    let letters=shuffle(target.split("").map(c=>({c,used:false})));
+    if(letters.map(o=>o.c).join("")===target) letters=letters.reverse();
+    let typed=[],tried=false;
+    function draw(msg,cls){
+      pane.innerHTML=gHead("spell",u)+`<div class="stage">${prog(i,words.length)}
+        <div class="prompt"><div class="bigemo">${w[2]}</div><p class="ar big">${esc(w[1])}</p>
+        <button class="listen" data-say="${esc(target)}">🔊 استمع للكلمة</button></div>
+        <div class="slots en" id="slots">${target.split("").map((_,k)=>`<span class="slot ${typed[k]?"f":""}">${typed[k]?esc(typed[k].c):""}</span>`).join("")}</div>
+        <div class="letters en">${letters.map((o,j)=>`<button class="let" data-j="${j}" ${o.used?"disabled":""}>${esc(o.c)}</button>`).join("")}</div>
+        <div class="row"><button class="btn ghost" id="del">⌫ امسح حرفاً</button></div>
+        <p class="fb ${cls||""}" aria-live="polite" style="text-align:center">${msg||""}</p></div>`;
+      bindGHead(pane);
+      $$(".let",pane).forEach(b=>b.onclick=()=>{ const o=letters[+b.dataset.j]; o.used=true; typed.push(o); draw(); if(typed.length===target.length) check(); });
+      $("#del",pane).onclick=()=>{ const o=typed.pop(); if(o){o.used=false;} draw(); };
+    }
+    function check(){
+      const sl=$("#slots",pane), fb=$(".fb",pane);
+      if(typed.map(o=>o.c).join("")===target){ if(!tried) score++; sGood(); say(target); sl.classList.add("okline"); burst(sl);
+        fb.className="fb g"; fb.textContent=praise(); $$(".let,#del",pane).forEach(x=>x.disabled=true); setTimeout(()=>{i++;show();},1200); }
+      else { tried=true; sBad(); sl.classList.add("no"); fb.className="fb b"; fb.textContent="ليست صحيحة، امسح بعض الحروف وجرّب مرة أخرى 💪"; }
+    }
+    draw();
+  }
+  show();
+}
+
+/* ---------- QUIZ ---------- */
+function gMatch(pane,u){
+  const words=pick(u.vocab,6), left=shuffle(words.map((w,id)=>({w,id}))), right=shuffle(left);
+  let selected=null, matched=0, mistakes=0;
+  pane.innerHTML=gHead("match",u)+`<div class="stage">${prog(0,words.length)}
+    <div class="bubbles"><div>${left.map(x=>`<button class="opt en" style="width:100%;margin-bottom:10px" data-left="${x.id}" aria-pressed="false">${esc(x.w[0])}</button>`).join("")}</div>
+    <div>${right.map(x=>`<button class="opt" style="width:100%;margin-bottom:10px" data-right="${x.id}">${esc(x.w[1])}</button>`).join("")}</div></div>
+    <p class="fb" aria-live="polite">اختر كلمة من العمود الإنجليزي أولاً.</p><div class="row"><button class="btn" id="matchDone" hidden>اعرض النتيجة 🏁</button></div></div>`;
+  bindGHead(pane);
+  const feedback=$(".fb",pane);
+  $$("[data-left]",pane).forEach(b=>b.onclick=()=>{
+    selected=+b.dataset.left;
+    $$("[data-left]",pane).forEach(x=>{x.setAttribute("aria-pressed",String(x===b)); x.style.outline=x===b?"3px solid var(--sky)":"";});
+    say(words[selected][0]); feedback.className="fb"; feedback.textContent="الآن اختر المعنى العربي.";
+  });
+  $$("[data-right]",pane).forEach(b=>b.onclick=()=>{
+    if(selected===null){feedback.textContent="اختر كلمة إنجليزية أولاً 👈";return;}
+    if(+b.dataset.right!==selected){mistakes++;sBad();feedback.className="fb b";feedback.textContent="حاول مرة أخرى، ابحث عن معنى الكلمة المحددة 💪";return;}
+    const a=$(`[data-left="${selected}"]`,pane); a.disabled=b.disabled=true; a.classList.add("ok"); b.classList.add("ok"); a.style.outline="";a.setAttribute("aria-pressed","false");
+    selected=null;matched++;sGood();burst(b);feedback.className="fb g";feedback.textContent=praise();$(".prog span",pane).style.width=Math.round(matched/words.length*100)+"%";
+    if(matched===words.length){const done=$("#matchDone",pane);done.hidden=false;done.onclick=()=>finishGame(pane,u,"match",`وصلت ${words.length} أزواج، مع ${mistakes} محاولات تحتاج تصحيحاً.`);done.focus();}
+  });
+}
+
+function gListen(pane,u){
+  const rounds=pick(u.vocab,8);let i=0,score=0;
+  function show(){
+    if(i===rounds.length)return finishGame(pane,u,"listen",`عرفت ${score} من ${rounds.length} كلمات من المحاولة الأولى.`);
+    const w=rounds[i], options=shuffle([w,...pick(u.vocab.filter(x=>x[1]!==w[1]),3)]);let tried=false;
+    pane.innerHTML=gHead("listen",u)+`<div class="stage">${prog(i,rounds.length)}<p class="meta">الكلمة ${i+1} من ${rounds.length}</p>
+      <div class="prompt"><div class="bigemo">🎧</div><button class="btn" id="playWord">🔊 استمع / أعد الاستماع</button>
+      <p id="audioHelp" aria-live="polite"></p><details><summary>مساعدة: أظهر الكلمة المكتوبة</summary><b class="en">${esc(w[0])}</b></details></div>
+      <div class="bubbles">${options.map((o,k)=>`<button class="opt" data-answer="${k}">${esc(o[1])}</button>`).join("")}</div>
+      <p class="fb" aria-live="polite"></p><div class="row"><button class="btn" id="listenNext" hidden>التالي ←</button></div></div>`;
+    bindGHead(pane);
+    $("#playWord",pane).onclick=()=>{
+      if(!("speechSynthesis" in window)){ $("#audioHelp",pane).textContent="الصوت غير متاح في هذا المتصفح. افتح المساعدة لقراءة الكلمة.";return; }
+      say(w[0]);
+    };
+    $$("[data-answer]",pane).forEach(b=>b.onclick=()=>{
+      const fb=$(".fb",pane);
+      if(options[+b.dataset.answer]!==w){tried=true;b.disabled=true;sBad();fb.className="fb b";fb.textContent="اسمع مرة أخرى وجرّب معنى آخر 💪";return;}
+      if(!tried)score++;$$("[data-answer]",pane).forEach(x=>x.disabled=true);b.classList.add("ok");sGood();fb.className="fb g";fb.textContent=`${w[0]} = ${w[1]} — ${praise()}`;
+      const next=$("#listenNext",pane);next.hidden=false;next.textContent=i+1===rounds.length?"اعرض النتيجة 🏁":"التالي ←";next.onclick=()=>{i++;show();};next.focus();
+    });
+  }show();
+}
+
+function gGrammar(pane,u){
+  const questions=pick(u.quiz,6);let i=0,score=0;
+  function show(){
+    if(i===questions.length)return finishGame(pane,u,"grammar",`حللت ${score} من ${questions.length} أسئلة من المحاولة الأولى. راجع الشرح وجرّب من جديد!`);
+    const q=questions[i],options=shuffle(q.o);let tried=false;
+    pane.innerHTML=gHead("grammar",u)+`<div class="stage">${prog(i,questions.length)}<p class="meta">التحدّي ${i+1} من ${questions.length}</p>
+      <p class="q en">${fmtBlank(q.q)} <button class="say sm" data-say="${esc(q.q)}" aria-label="استمع للجملة">🔊</button></p>
+      <div class="opts">${options.map((o,k)=>`<button class="opt en" data-choice="${k}">${esc(o)}</button>`).join("")}</div>
+      <div class="fbbox" hidden aria-live="polite"></div><div class="row"><button class="btn" id="grammarNext" hidden>التالي ←</button></div></div>`;
+    bindGHead(pane);
+    $$("[data-choice]",pane).forEach(b=>b.onclick=()=>{
+      const ok=options[+b.dataset.choice]===q.o[0],fb=$(".fbbox",pane);fb.hidden=false;fb.className="fbbox "+(ok?"good":"bad");
+      fb.innerHTML=`<p>${ok?praise():"اقرأ التلميح وحاول مرة أخرى 💪"}</p><p>${esc(q.why)}</p>`;
+      if(!ok){tried=true;b.disabled=true;b.classList.add("no");sBad();return;}
+      if(!tried)score++;sGood();burst(b);b.classList.add("ok");$$("[data-choice]",pane).forEach(x=>x.disabled=true);
+      const next=$("#grammarNext",pane);next.hidden=false;next.textContent=i+1===questions.length?"اعرض النتيجة 🏁":"التالي ←";next.onclick=()=>{i++;show();};next.focus();
+    });
+  }show();
+}
+
+function renderQuizIntro(pane,u){
+  const best=U(u.id).quiz;
+  pane.innerHTML=`<div class="stage end"><div class="bigemo">✅</div><h2>اختبار الوحدة <span class="en">Unit quiz</span></h2>
+  <p>${u.quiz.length} سؤالاً من دروس الوحدة. بعد كل إجابة سترى الشرح بالعربي.<br>احصل على 70٪ أو أكثر لتربح النجمة ⭐</p>
+  ${best?`<p>أفضل نتيجة لك: <b>${best}٪</b></p>`:""}
+  <div class="row"><button class="btn" id="go">ابدأ الاختبار 🚀</button></div></div>`;
+  $("#go",pane).onclick=()=>runQuiz(pane,u.quiz,{
+    onDone:pct=>{ if(pct>U(u.id).quiz){U(u.id).quiz=pct; save(); updateTop();} },
+    back:()=>{ S.tab="quiz"; render(); }, backLabel:"رجوع للوحدة"
+  });
+}
+
+function runQuiz(pane,qs,opt){
+  const list=shuffle(qs).map(x=>({...x,opts:shuffle(x.o),ans:x.o[0]}));
+  let i=0,score=0; const wrong=[];
+  function show(){
+    if(i>=list.length) return result();
+    const x=list[i];
+    pane.innerHTML=`<div class="stage">${prog(i,list.length)}
+      <p class="qnum">سؤال ${i+1} من ${list.length}${x.unitTag?` · <span class="en">${esc(x.unitTag)}</span>`:""}</p>
+      <p class="q en">${fmtBlank(x.q)} <button class="say sm" data-say="${esc(x.q)}" aria-label="استمع">🔊</button></p>
+      <div class="opts">${x.opts.map(o=>`<button class="opt en" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+      <div class="fbbox" hidden aria-live="polite"></div></div>`;
+    $$(".opt",pane).forEach(b=>b.onclick=()=>{
+      const ok=b.dataset.o===x.ans;
+      $$(".opt",pane).forEach(o=>{ o.disabled=true; if(o.dataset.o===x.ans) o.classList.add("ok"); });
+      if(ok){ score++; sGood(); burst(b); } else { b.classList.add("no"); sBad(); wrong.push(x); }
+      const fb=$(".fbbox",pane); fb.hidden=false; fb.className="fbbox "+(ok?"good":"bad");
+      fb.innerHTML=`<p class="fbt">${ok?praise():"الإجابة الصحيحة: <b class='en'>"+esc(x.ans)+"</b>"}</p><p>${esc(x.why)}</p>
+        <button class="btn" id="nx">${i+1<list.length?"السؤال التالي ←":"اعرض النتيجة 🏁"}</button>`;
+      const nx=$("#nx",pane); nx.onclick=()=>{ i++; show(); }; nx.focus({preventScroll:false});
+    });
+  }
+  function result(){
+    const pct=Math.round(score/list.length*100); opt.onDone(pct);
+    const st=pct>=90?3:pct>=70?2:pct>=50?1:0;
+    const face=pct>=90?"🏆":pct>=70?"🌟":pct>=50?"👍":"💪";
+    const msg=pct>=90?"ممتاز جداً! أنت جاهز! Amazing!":pct>=70?"أحسنت! عمل رائع. Great work!":pct>=50?"جيد! راجع الأخطاء وحاول مرة أخرى.":"لا بأس! ارجع للشرح والألعاب ثم جرّب من جديد.";
+    if(pct>=70) sWin();
+    pane.innerHTML=`<div class="stage end"><div class="bigemo">${face}</div><h2>${score} / ${list.length} · ${pct}٪</h2>${starHTML(st)}<p>${msg}</p>
+      ${wrong.length?`<h3 style="text-align:start;margin-bottom:0">📝 راجع أخطاءك:</h3><ul class="review">${wrong.map(x=>`<li><span class="en">${esc(x.q.replace(/_{3}/g,"…"))}</span><span class="en" style="color:var(--good)">✔ ${esc(x.ans)}</span><small>${esc(x.why)}</small></li>`).join("")}</ul>`:""}
+      <div class="row"><button class="btn" id="re">أعد الاختبار 🔁</button><button class="btn ghost" id="bk2">${opt.backLabel}</button></div></div>`;
+    if(pct>=70) burst($(".bigemo",pane));
+    $("#re",pane).onclick=()=>runQuiz(pane,qs,opt);
+    $("#bk2",pane).onclick=opt.back;
+    updateTop();
+  }
+  show();
+}
+
+/* ---------- FINAL ---------- */
+function buildFinal(){
+  const plan={w:3,u1:5,u2:5,u3:5,u4:5,bo:2}; let out=[];
+  UNITS.forEach(u=>{ out=out.concat(pick(u.quiz,plan[u.id]||3).map(q=>({...q,unitTag:u.num==="★"?"Learning Club":"Unit "+u.num}))); });
+  return shuffle(out);
+}
+function renderFinal(){
+  app.innerHTML=`<button class="back" id="bk">→ الرئيسية</button>
+  <header class="uhero" style="--c:var(--sun)"><div class="big">🏆</div><div><h1 class="en">Final test</h1><p class="ar">الاختبار النهائي ${starHTML(finalStars())}</p><p class="d">25 سؤالاً مختلطة من كل الوحدات، والأسئلة تتغير في كل مرة.</p></div></header>
+  <div class="pane" id="pane" style="--c:var(--sun);margin-top:18px"></div>`;
+  $("#bk").onclick=()=>go({view:"home"});
+  const pane=$("#pane");
+  const ready=UNITS.filter(u=>U(u.id).quiz>=70).length;
+  pane.innerHTML=`<div class="stage"><h2 style="margin-top:0">💡 نصائح قبل الاختبار</h2>
+  <ul class="tips">
+    <li>اقرأ السؤال كاملاً، وابحث عن كلمات مهمة مثل <span class="en">than</span> و <span class="en">the</span> و <span class="en">yesterday</span> و <span class="en">tomorrow</span>.</li>
+    <li>مع <span class="en">than</span> ← مقارنة (<span class="en">bigger</span>)، ومع <span class="en">the</span> ← تفضيل (<span class="en">the biggest</span>).</li>
+    <li><span class="en">yesterday / last / ago</span> ← ماضٍ. <span class="en">tomorrow / next</span> ← <span class="en">will</span>.</li>
+    <li>بعد <span class="en">at</span> و <span class="en">How about</span> يأتي الفعل مع <span class="en">ing</span>.</li>
+    <li>شخص ← <span class="en">who</span>، شيء ← <span class="en">which</span>، مكان ← <span class="en">where</span>.</li>
+    <li>احذف الإجابات الخاطئة أولاً، ثم اختر من الباقي.</li>
+  </ul>
+  <p>نجحت في ${ready} من ${UNITS.length} اختبارات الوحدات. ${ready<UNITS.length?"يمكنك البدء الآن، أو مراجعة الوحدات أولاً.":"أنت مستعد تماماً! 💪"}</p>
+  ${P.final?`<p>أفضل نتيجة لك: <b>${P.final}٪</b></p>`:""}
+  <div class="row"><button class="btn" id="go">ابدأ الاختبار النهائي 🚀</button></div></div>`;
+  $("#go",pane).onclick=()=>runQuiz(pane,buildFinal(),{
+    onDone:pct=>{ if(pct>(P.final||0)){P.final=pct; save();} },
+    back:()=>go({view:"home"}), backLabel:"الرئيسية"
+  });
+}
+
+/* ---------- NAME MODAL ---------- */
+function askName(){
+  const m=document.createElement("div"); m.className="modal";
+  m.innerHTML=`<div class="box" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="bigemo">🦉</div>
+   <h2 id="mt" style="margin:4px 0">مرحباً! <span class="en">Hello!</span></h2><p style="margin:0">ما اسمك؟ <span class="en">What's your name?</span></p>
+   <input id="nm" maxlength="20" autocomplete="off" placeholder="اكتب اسمك هنا">
+   <div class="row" style="margin-top:0"><button class="btn" id="ok">هيا نبدأ! 🚀</button><button class="btn ghost" id="skip">لاحقاً</button></div></div>`;
+  document.body.appendChild(m);
+  const close=()=>{ P.asked=true; save(); m.remove(); render(); };
+  $("#ok",m).onclick=()=>{ P.name=$("#nm",m).value.trim(); close(); sWin(); };
+  $("#skip",m).onclick=close;
+  $("#nm",m).addEventListener("keydown",e=>{ if(e.key==="Enter") $("#ok",m).click(); });
+  setTimeout(()=>{ try{$("#nm",m).focus();}catch(e){} },100);
+}
+
+render();
+if(!P.asked) askName();
+</script>
+</body>
+</html>
