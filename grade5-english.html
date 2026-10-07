@@ -241,6 +241,10 @@ footer button{text-decoration:underline;font-size:14px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+.xin{width:100%;font-size:24px;padding:12px;border-radius:16px;border:2px solid var(--line);background:var(--paper2);color:var(--ink);text-align:center;margin:10px 0}.xin.okk{border-color:var(--good);background:var(--good-bg)}
+.xtop{display:flex;justify-content:space-between;align-items:center;font-size:22px;font-weight:800;margin-bottom:10px}.xcatch{position:relative;height:320px;overflow:hidden;border-radius:22px;background:var(--paper2);border:1px solid var(--line)}
+.xfall{position:absolute;padding:10px 16px;font-size:19px;font-weight:800;background:var(--paper);color:var(--ink);border-radius:16px;box-shadow:var(--shadow);border:2px solid var(--line)}
+.opt.ok{background:var(--good-bg);border-color:var(--good)}.opt.no{background:var(--bad-bg);border-color:var(--bad);opacity:.75}
 </style>
 </head>
 <body>
@@ -637,18 +641,66 @@ function fmtBlank(q){ return esc(q).replace(/_{3}/g,'<span class="blank">___</sp
 
 /* ---------- GAMES ---------- */
 const GAMES={
-  match:{e:"🔗",ar:"لعبة التوصيل",en:"Word Match",d:"اختر كلمة إنجليزية ثم صِلها بمعناها العربي.",fn:gMatch},
-  listen:{e:"🎧",ar:"اسمع واختر",en:"Listen & Choose",d:"استمع للكلمة واختر معناها، وأعد الاستماع متى أردت.",fn:gListen},
-  grammar:{e:"🎯",ar:"تحدّي القواعد",en:"Grammar Challenge",d:"أكمل الجملة وتعلّم من الشرح، ثم حاول مرة أخرى.",fn:gGrammar},
   memory:{e:"🃏",ar:"لعبة الذاكرة",en:"Memory",d:"طابِق الكلمة الإنجليزية مع معناها.",fn:gMemory},
   pop:{e:"🎈",ar:"اختر الكلمة",en:"Word Pop",d:"انظر للصورة والمعنى واختر الكلمة الصحيحة.",fn:gPop},
   order:{e:"🧩",ar:"رتّب الجملة",en:"Sentence Builder",d:"اضغط الكلمات بالترتيب الصحيح.",fn:gOrder},
   sort:{e:"🗂️",ar:"صنّف الكلمات",en:"Sorting",d:"ضع كل كلمة في مجموعتها.",fn:gSort},
   spell:{e:"🐝",ar:"تهجئة الكلمات",en:"Spelling Bee",d:"رتّب الحروف لتكتب الكلمة.",fn:gSpell}
 };
+/* ===== New games (added) ===== */
+const ALLV=UNITS.flatMap(x=>x.vocab),NK=s=>String(s).toLowerCase().replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();
+const dv=(u,w,i)=>[...new Set([...shuffle(u.vocab),...shuffle(ALLV)].map(x=>x[i]).filter(x=>x&&x!==w[i]))].slice(0,3);
+const PAIRS=u=>[...new Map([...u.sentences,...u.lessons.flatMap(l=>l.ex||[])].map(p=>[p[0],p])).values()];
+const BIG=t=>`<p class="en" style="font-size:26px;font-weight:800;margin:4px 0">${esc(t)}</p>`;
+function xo(pane,u,key,R){let i=0,sc=0;const show=()=>{if(i>=R.length)return finishGame(pane,u,key,`أجبت من المحاولة الأولى على ${sc} من ${R.length}.`);const r=R[i],O=shuffle(r.o.map((t,k)=>({t,k})));let tried=false;
+ pane.innerHTML=gHead(key,u)+`<div class="stage">${prog(i,R.length)}<div class="prompt">${r.pre}${r.say?` <button class="say sm" data-say="${esc(r.say)}" aria-label="استمع">🔊</button>`:""}</div><div class="opts">${O.map(o=>`<button class="opt ${r.ar?"":"en"}" data-k="${o.k}">${r.raw?o.t:esc(o.t)}</button>`).join("")}</div><p class="fb" aria-live="polite" style="text-align:center"></p></div>`;
+ bindGHead(pane);if(r.auto)setTimeout(()=>say(r.say),300);
+ $$(".opt",pane).forEach(b=>b.onclick=()=>{const fb=$(".fb",pane);if(+b.dataset.k===r.a){$$(".opt",pane).forEach(x=>x.disabled=true);b.classList.add("ok");if(!tried)sc++;sGood();if(r.say)say(r.say);burst(b);fb.className="fb g";fb.textContent=praise();setTimeout(()=>{i++;show()},1000)}else{tried=true;b.classList.add("no");b.disabled=true;sBad();fb.className="fb b";fb.textContent="حاول مرة أخرى 💪"}})};show()}
+const XR={
+ listen:u=>pick(u.vocab,8).map(w=>({pre:`<p class="ar big">اسمع ثم اختر الصورة 🎧</p>`,say:w[0],auto:1,raw:1,o:[w[2],...dv(u,w,2)].map(e=>`<span style="font-size:42px">${e}</span>`),a:0})),
+ mean:u=>pick(u.vocab,8).map(w=>({pre:`<div class="bigemo">${w[2]}</div>${BIG(w[0])}`,say:w[0],ar:1,o:[w[1],...dv(u,w,1)],a:0})),
+ tran:u=>pick(u.vocab,8).map(w=>({pre:`<p class="ar big">${esc(w[1])}</p>`,o:[w[0],...dv(u,w,0)],a:0,say:w[0]})),
+ tfm:u=>pick(u.vocab,10).map(w=>{const t=Math.random()<.5;return{pre:`<div class="bigemo">${w[2]}</div>${BIG(w[0])}<p class="ar big">= ${esc(t?w[1]:dv(u,w,1)[0])}</p>`,say:w[0],ar:1,o:["صح ✔","خطأ ✘"],a:t?0:1}}),
+ stran:u=>{const P=PAIRS(u);return pick(P,6).map(p=>{const e2a=Math.random()<.5,kk=e2a?1:0,d=pick([...new Map(P.filter(x=>x[kk]!==p[kk]).map(x=>[x[kk],x])).values()],2);return e2a?{pre:`<p class="ar" style="font-weight:700">ما ترجمة الجملة؟</p>${BIG(p[0])}`,say:p[0],ar:1,o:[p[1],...d.map(x=>x[1])],a:0}:{pre:`<p class="ar" style="font-weight:700">اختر الجملة الإنجليزية المناسبة</p><p class="ar big">${esc(p[1])}</p>`,say:p[0],o:[p[0],...d.map(x=>x[0])],a:0}})},
+ cloze:u=>{const ch=u.lessons.filter(l=>l.check).map(l=>({pre:`<p class="ar" style="font-weight:700">اختر الكلمة المناسبة</p>${BIG(l.check.q)}`,o:l.check.o.slice(0,4),a:0,say:l.check.q.replace("___",l.check.o[0])}));
+  const ex=pick(PAIRS(u),30).map(p=>{const w=u.vocab.find(v=>v[0].length>2&&!/\s/.test(v[0])&&new RegExp("\\b"+v[0]+"\\b","i").test(p[0]));return w&&{pre:`<p class="ar" style="font-weight:700">أكمل الجملة</p>${BIG(p[0].replace(new RegExp("\\b"+w[0]+"\\b","i"),"_____"))}<p class="ar">${esc(p[1])}</p>`,o:[w[0],...dv(u,w,0)],a:0,say:p[0]}}).filter(Boolean).slice(0,5);
+  return shuffle([...ch,...ex]).slice(0,8)},
+ miss:u=>pick(u.vocab.filter(w=>/^[a-z]{3,10}$/i.test(w[0])),8).map(w=>{const k=1+Math.floor(Math.random()*(w[0].length-1)),c=w[0][k].toLowerCase(),L=shuffle("abcdefghijklmnoprstuwy".split("").filter(x=>x!==c)).slice(0,3);return{pre:`<div class="bigemo">${w[2]}</div><p class="ar big">${esc(w[1])}</p><p class="en" style="font-size:34px;font-weight:800;letter-spacing:4px">${esc(w[0].slice(0,k))}<span style="color:var(--bad)">_</span>${esc(w[0].slice(k+1))}</p>`,say:w[0],o:[c,...L],a:0}})
+};
+function xt(pane,u,key){const I=pick(u.vocab,6);let k=0,ok=0;const step=()=>{if(k>=I.length)return finishGame(pane,u,key,`كتبت ${ok} من ${I.length} كلمات من المحاولة الأولى.`);const w=I[k];let wr=0;
+ pane.innerHTML=gHead(key,u)+`<div class="stage">${prog(k,I.length)}<div class="prompt"><div class="bigemo">${w[2]}</div><p class="ar big">${esc(w[1])}</p></div><input class="xin en" dir="ltr" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(w[0][0])} …"><p class="fb" style="text-align:center"></p><div class="row xr"><button class="btn xck">تحقق ✓</button><button class="btn ghost xsk">أظهر الجواب</button></div></div>`;bindGHead(pane);
+ const inp=$(".xin",pane),nx=()=>{$(".xr",pane).innerHTML='<button class="btn xnx">التالي ←</button>';$(".xnx",pane).onclick=()=>{k++;step()}};
+ $(".xck",pane).onclick=()=>{if(NK(inp.value)===NK(w[0])){if(!wr)ok++;sGood();say(w[0]);inp.classList.add("okk");$(".fb",pane).className="fb g";$(".fb",pane).textContent=praise();nx()}else{wr=1;sBad();$(".fb",pane).className="fb b";$(".fb",pane).textContent=`تلميح: ${w[0].length} حرفًا وتبدأ بحرف ${w[0][0]}`}};
+ inp.onkeydown=e=>{if(e.key==="Enter")$(".xck",pane).onclick()};$(".xsk",pane).onclick=()=>{wr=1;inp.value=w[0];say(w[0]);nx()}};step()}
+function xc(pane,u,key){const W=u.vocab,T=pick(W,5);let ti=0,sc=0,lives=3,els=[],end=0;
+ pane.innerHTML=gHead(key,u)+`<div class="stage"><div class="xtop"><span class="xct"></span><span class="xlv"></span></div><div class="xcatch"></div><p class="fb" style="text-align:center">اضغط على الكلمة الصحيحة قبل أن تنزل!</p></div>`;bindGHead(pane);const cs=$(".xcatch",pane);
+ const hud=()=>{$(".xct",pane).innerHTML=`${T[ti][2]} <b class="ar">${esc(T[ti][1])}</b>`;$(".xlv",pane).textContent="❤️".repeat(lives)+" ⭐"+sc};
+ const fin=()=>{end=1;finishGame(pane,u,key,`اصطدت ${sc} من ${T.length} كلمات.`)};
+ const sp=()=>{const it=Math.random()<.5?T[ti]:(shuffle(W.filter(x=>x!==T[ti]&&x[0]!==T[ti][0]))[0]||T[ti]);const e=document.createElement("button");e.className="xfall en";e.textContent=it[0];e.style.left=Math.random()*Math.max(10,cs.clientWidth-150)+"px";e.y=-50;
+  e.onclick=()=>{if(e.dead||end)return;e.dead=1;e.remove();if(it===T[ti]){sc++;sGood();say(it[0]);els.forEach(x=>x.remove());els=[];ti++;if(ti>=T.length)return fin();hud()}else{lives--;sBad();hud();if(!lives)fin()}};cs.appendChild(e);els.push(e)};
+ hud();let last=performance.now(),acc=900;
+ const loop=t=>{if(!cs.isConnected||end)return;const dt=Math.min(50,t-last);last=t;acc+=dt;if(acc>1300){acc=0;sp()}els.forEach(e=>{e.y+=dt*.07;e.style.top=e.y+"px";if(e.y>cs.clientHeight)e.dead=1});els.filter(e=>e.dead&&e.isConnected).forEach(e=>e.remove());els=els.filter(e=>!e.dead);requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+function xs(pane,u,key){let sc=0,t0=Date.now(),over=0;const LIM=45000;
+ pane.innerHTML=gHead(key,u)+`<div class="stage"><div class="xtop"><span>⏱️ <b class="xtm">45</b></span><span>⭐ <b class="xsc">0</b></span></div><div class="xq"></div></div>`;bindGHead(pane);
+ const tm=setInterval(()=>{if(!pane.isConnected||over){clearInterval(tm);return}const left=Math.max(0,Math.ceil((LIM-(Date.now()-t0))/1e3));$(".xtm",pane).textContent=left;if(left<=0){over=1;clearInterval(tm);finishGame(pane,u,key,`أجبت على ${sc} أسئلة صحيحة في 45 ثانية!`)}},250);
+ const nxt=()=>{const w=pick(u.vocab,1)[0],a2e=Math.random()<.5,i=a2e?0:1,O=shuffle([w[i],...dv(u,w,i)]);
+  $(".xq",pane).innerHTML=`<div class="prompt"><div class="bigemo">${w[2]}</div>${a2e?`<p class="ar big">${esc(w[1])}</p>`:BIG(w[0])}</div><div class="opts">${O.map(o=>`<button class="opt ${a2e?"en":""}" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
+  $$(".opt",pane).forEach(b=>b.onclick=()=>{if(over)return;if(b.dataset.o===w[i]){sc++;$(".xsc",pane).textContent=sc;sGood()}else sBad();nxt()})};nxt()}
+Object.assign(GAMES,{
+ listen:{e:"🎧",ar:"اسمع واختر",en:"Listen & Pick",d:"اسمع الكلمة واختر صورتها.",fn:(p,u)=>xo(p,u,"listen",XR.listen(u))},
+ mean:{e:"🔁",ar:"ما المعنى؟",en:"Word Meaning",d:"اختر المعنى العربي للكلمة.",fn:(p,u)=>xo(p,u,"mean",XR.mean(u))},
+ tran:{e:"🌐",ar:"ترجم من العربي",en:"Translate",d:"اختر الكلمة الإنجليزية المناسبة.",fn:(p,u)=>xo(p,u,"tran",XR.tran(u))},
+ stran:{e:"📖",ar:"ترجم الجملة",en:"Sentence Translation",d:"اختر ترجمة الجملة الصحيحة.",fn:(p,u)=>xo(p,u,"stran",XR.stran(u))},
+ tfm:{e:"✅",ar:"صح أم خطأ؟",en:"True or False",d:"هل المعنى صحيح؟",fn:(p,u)=>xo(p,u,"tfm",XR.tfm(u))},
+ cloze:{e:"✏️",ar:"أكمل الجملة",en:"Fill the Gap",d:"اختر الكلمة الناقصة في الجملة.",fn:(p,u)=>xo(p,u,"cloze",XR.cloze(u))},
+ miss:{e:"🔡",ar:"الحرف الناقص",en:"Missing Letter",d:"اختر الحرف الناقص في الكلمة.",fn:(p,u)=>xo(p,u,"miss",XR.miss(u))},
+ type:{e:"⌨️",ar:"اكتب الكلمة",en:"Type It",d:"اكتب الكلمة بالإنجليزية.",fn:(p,u)=>xt(p,u,"type")},
+ catch:{e:"🎯",ar:"اصطد الكلمة",en:"Catch It",d:"اصطد الكلمة قبل أن تسقط.",fn:(p,u)=>xc(p,u,"catch")},
+ speed:{e:"⚡",ar:"تحدي السرعة",en:"Speed Round",d:"أجب على أكبر عدد في 45 ثانية!",fn:(p,u)=>xs(p,u,"speed")}});
+
 function renderGames(pane,u){
   const done=U(u.id).games;
-  pane.innerHTML=`<h2 class="sec">🎮 اختر لعبة <small style="font-weight:500;color:var(--muted);font-size:15px">— العب ٣ ألعاب لتحصل على نجمة</small></h2>
+  pane.innerHTML=`<h2 class="sec">🎮 اختر لعبة <small style="font-weight:500;color:var(--muted);font-size:15px">— العب ٣ ألعاب أو أكثر لتحصل على نجمة</small></h2>
   <div class="games">${Object.entries(GAMES).map(([k,g])=>`<button class="gcard" data-g="${k}">${done[k]?'<span class="done">✔ لعبتها</span>':""}<span class="e">${g.e}</span><b>${g.ar}</b><span class="en">${g.en}${k==="sort"?" · "+esc(u.sort.en):""}</span><p>${k==="sort"?esc(u.sort.ar):g.d}</p></button>`).join("")}</div>`;
   $$("[data-g]",pane).forEach(b=>b.onclick=()=>{ S.game=b.dataset.g; render(); });
 }
@@ -795,73 +847,6 @@ function gSpell(pane,u){
 }
 
 /* ---------- QUIZ ---------- */
-function gMatch(pane,u){
-  const words=pick(u.vocab,6), left=shuffle(words.map((w,id)=>({w,id}))), right=shuffle(left);
-  let selected=null, matched=0, mistakes=0;
-  pane.innerHTML=gHead("match",u)+`<div class="stage">${prog(0,words.length)}
-    <div class="bubbles"><div>${left.map(x=>`<button class="opt en" style="width:100%;margin-bottom:10px" data-left="${x.id}" aria-pressed="false">${esc(x.w[0])}</button>`).join("")}</div>
-    <div>${right.map(x=>`<button class="opt" style="width:100%;margin-bottom:10px" data-right="${x.id}">${esc(x.w[1])}</button>`).join("")}</div></div>
-    <p class="fb" aria-live="polite">اختر كلمة من العمود الإنجليزي أولاً.</p><div class="row"><button class="btn" id="matchDone" hidden>اعرض النتيجة 🏁</button></div></div>`;
-  bindGHead(pane);
-  const feedback=$(".fb",pane);
-  $$("[data-left]",pane).forEach(b=>b.onclick=()=>{
-    selected=+b.dataset.left;
-    $$("[data-left]",pane).forEach(x=>{x.setAttribute("aria-pressed",String(x===b)); x.style.outline=x===b?"3px solid var(--sky)":"";});
-    say(words[selected][0]); feedback.className="fb"; feedback.textContent="الآن اختر المعنى العربي.";
-  });
-  $$("[data-right]",pane).forEach(b=>b.onclick=()=>{
-    if(selected===null){feedback.textContent="اختر كلمة إنجليزية أولاً 👈";return;}
-    if(+b.dataset.right!==selected){mistakes++;sBad();feedback.className="fb b";feedback.textContent="حاول مرة أخرى، ابحث عن معنى الكلمة المحددة 💪";return;}
-    const a=$(`[data-left="${selected}"]`,pane); a.disabled=b.disabled=true; a.classList.add("ok"); b.classList.add("ok"); a.style.outline="";a.setAttribute("aria-pressed","false");
-    selected=null;matched++;sGood();burst(b);feedback.className="fb g";feedback.textContent=praise();$(".prog span",pane).style.width=Math.round(matched/words.length*100)+"%";
-    if(matched===words.length){const done=$("#matchDone",pane);done.hidden=false;done.onclick=()=>finishGame(pane,u,"match",`وصلت ${words.length} أزواج، مع ${mistakes} محاولات تحتاج تصحيحاً.`);done.focus();}
-  });
-}
-
-function gListen(pane,u){
-  const rounds=pick(u.vocab,8);let i=0,score=0;
-  function show(){
-    if(i===rounds.length)return finishGame(pane,u,"listen",`عرفت ${score} من ${rounds.length} كلمات من المحاولة الأولى.`);
-    const w=rounds[i], options=shuffle([w,...pick(u.vocab.filter(x=>x[1]!==w[1]),3)]);let tried=false;
-    pane.innerHTML=gHead("listen",u)+`<div class="stage">${prog(i,rounds.length)}<p class="meta">الكلمة ${i+1} من ${rounds.length}</p>
-      <div class="prompt"><div class="bigemo">🎧</div><button class="btn" id="playWord">🔊 استمع / أعد الاستماع</button>
-      <p id="audioHelp" aria-live="polite"></p><details><summary>مساعدة: أظهر الكلمة المكتوبة</summary><b class="en">${esc(w[0])}</b></details></div>
-      <div class="bubbles">${options.map((o,k)=>`<button class="opt" data-answer="${k}">${esc(o[1])}</button>`).join("")}</div>
-      <p class="fb" aria-live="polite"></p><div class="row"><button class="btn" id="listenNext" hidden>التالي ←</button></div></div>`;
-    bindGHead(pane);
-    $("#playWord",pane).onclick=()=>{
-      if(!("speechSynthesis" in window)){ $("#audioHelp",pane).textContent="الصوت غير متاح في هذا المتصفح. افتح المساعدة لقراءة الكلمة.";return; }
-      say(w[0]);
-    };
-    $$("[data-answer]",pane).forEach(b=>b.onclick=()=>{
-      const fb=$(".fb",pane);
-      if(options[+b.dataset.answer]!==w){tried=true;b.disabled=true;sBad();fb.className="fb b";fb.textContent="اسمع مرة أخرى وجرّب معنى آخر 💪";return;}
-      if(!tried)score++;$$("[data-answer]",pane).forEach(x=>x.disabled=true);b.classList.add("ok");sGood();fb.className="fb g";fb.textContent=`${w[0]} = ${w[1]} — ${praise()}`;
-      const next=$("#listenNext",pane);next.hidden=false;next.textContent=i+1===rounds.length?"اعرض النتيجة 🏁":"التالي ←";next.onclick=()=>{i++;show();};next.focus();
-    });
-  }show();
-}
-
-function gGrammar(pane,u){
-  const questions=pick(u.quiz,6);let i=0,score=0;
-  function show(){
-    if(i===questions.length)return finishGame(pane,u,"grammar",`حللت ${score} من ${questions.length} أسئلة من المحاولة الأولى. راجع الشرح وجرّب من جديد!`);
-    const q=questions[i],options=shuffle(q.o);let tried=false;
-    pane.innerHTML=gHead("grammar",u)+`<div class="stage">${prog(i,questions.length)}<p class="meta">التحدّي ${i+1} من ${questions.length}</p>
-      <p class="q en">${fmtBlank(q.q)} <button class="say sm" data-say="${esc(q.q)}" aria-label="استمع للجملة">🔊</button></p>
-      <div class="opts">${options.map((o,k)=>`<button class="opt en" data-choice="${k}">${esc(o)}</button>`).join("")}</div>
-      <div class="fbbox" hidden aria-live="polite"></div><div class="row"><button class="btn" id="grammarNext" hidden>التالي ←</button></div></div>`;
-    bindGHead(pane);
-    $$("[data-choice]",pane).forEach(b=>b.onclick=()=>{
-      const ok=options[+b.dataset.choice]===q.o[0],fb=$(".fbbox",pane);fb.hidden=false;fb.className="fbbox "+(ok?"good":"bad");
-      fb.innerHTML=`<p>${ok?praise():"اقرأ التلميح وحاول مرة أخرى 💪"}</p><p>${esc(q.why)}</p>`;
-      if(!ok){tried=true;b.disabled=true;b.classList.add("no");sBad();return;}
-      if(!tried)score++;sGood();burst(b);b.classList.add("ok");$$("[data-choice]",pane).forEach(x=>x.disabled=true);
-      const next=$("#grammarNext",pane);next.hidden=false;next.textContent=i+1===questions.length?"اعرض النتيجة 🏁":"التالي ←";next.onclick=()=>{i++;show();};next.focus();
-    });
-  }show();
-}
-
 function renderQuizIntro(pane,u){
   const best=U(u.id).quiz;
   pane.innerHTML=`<div class="stage end"><div class="bigemo">✅</div><h2>اختبار الوحدة <span class="en">Unit quiz</span></h2>
